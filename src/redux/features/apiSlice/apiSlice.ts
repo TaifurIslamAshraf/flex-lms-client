@@ -11,7 +11,7 @@ export const apiSlice = createApi({
     refreshToken: builder.query({
       query: () => ({
         url: "/auth/refresh",
-        method: "POST",
+        method: "GET",
         credentials: "include" as const,
       }),
     }),
@@ -25,10 +25,11 @@ export const apiSlice = createApi({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
+          console.log(result);
           dispatch(
             userLogin({
               accessToken: result.data?.accessToken,
-              user: result.data.user,
+              user: result.data?.data,
             })
           );
         } catch (error: any) {

@@ -1,5 +1,5 @@
 import { apiSlice } from "../apiSlice/apiSlice";
-import { loadUser, userLogin, userLogout, userRegistretion } from "./authSlice";
+import { loadUser, userLogin, userLogout } from "./authSlice";
 
 export const authApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
@@ -32,21 +32,11 @@ export const authApi = apiSlice.injectEndpoints({
 
     register: build.mutation({
       query: (data) => ({
-        url: "/user/register",
+        url: "/auth/register",
         method: "POST",
         body: data,
         credentials: "include" as const,
       }),
-      invalidatesTags: ["Users"] as any,
-
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-        try {
-          const result = await queryFulfilled;
-          dispatch(userRegistretion({ token: result.data.activationToken }));
-        } catch (error: any) {
-          console.log(error.message);
-        }
-      },
     }),
 
     logout: build.query({
@@ -106,7 +96,7 @@ export const authApi = apiSlice.injectEndpoints({
 
     getMe: build.query({
       query: ({}) => ({
-        url: "/user/me",
+        url: "/users/me",
         method: "GET",
         credentials: "include",
       }),

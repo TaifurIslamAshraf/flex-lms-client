@@ -2,7 +2,6 @@
 
 import { z } from "zod";
 
-import Activation from "@/components/Activation";
 import { LoadingButton } from "@/components/LoaderButton";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,13 +24,14 @@ import { Label } from "@/components/ui/label";
 import { useRegisterMutation } from "@/redux/features/auth/authApi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 const registerFormSchema = z
   .object({
-    fullName: z.string().min(1, "Enter Your Full Name"),
+    name: z.string().min(1, "Enter Your Full Name"),
     email: z
       .string()
       .min(1, "Enter Your Email Address")
@@ -40,7 +40,6 @@ const registerFormSchema = z
       .string()
       .min(1, "Enter Your Phone Number")
       .regex(/^(\+88)?(01[3-9]\d{8})$/, "Invalid Phone Number"),
-    address: z.string().min(1, "Address is required"),
     password: z
       .string()
       .min(1, "Password is required")
@@ -56,15 +55,15 @@ const registerFormSchema = z
   });
 
 const Register = () => {
-  const [open, setOpen] = useState(false);
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof registerFormSchema>>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: {
-      fullName: "",
+      name: "",
       email: "",
       password: "",
       confirmPassword: "",
-      address: "",
       phone: "",
     },
   });
@@ -78,9 +77,9 @@ const Register = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success("Send Activation Code in you mail");
-      setOpen(true);
+      toast.success("Sign up successfull");
       form.reset();
+      router.replace("/login");
     } else if (error) {
       const newError = error as any;
       toast.error(newError.data?.message);
@@ -92,9 +91,9 @@ const Register = () => {
     <div className="min-h-screen flex flex-col items-center justify-center">
       <Card className="max-w-[500px] w-full">
         <CardHeader>
-          <CardTitle>Register</CardTitle>
+          <CardTitle>Sign Up</CardTitle>
           <CardDescription>
-            If you dont have an account register now. else login
+            If you dont have an account register now. else sign in
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-2">
@@ -104,7 +103,7 @@ const Register = () => {
               className="space-y-5"
             >
               <FormField
-                name="fullName"
+                name="name"
                 control={form.control}
                 render={({ field }) => (
                   <FormItem>
@@ -112,7 +111,7 @@ const Register = () => {
                     <FormControl>
                       <Input
                         disabled={isLoading}
-                        placeholder="MD. Taifur islam"
+                        placeholder="Enter Your Full Name"
                         {...field}
                       />
                     </FormControl>
@@ -120,57 +119,43 @@ const Register = () => {
                   </FormItem>
                 )}
               />
-              <FormField
-                name="email"
-                control={form.control}
-                render={({ field }) => (
-                  <FormItem>
-                    <Label className="text-primary">Email</Label>
-                    <FormControl>
-                      <Input
-                        disabled={isLoading}
-                        placeholder="Enter Your Email"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                name="phone"
-                control={form.control}
-                render={({ field }) => (
-                  <FormItem>
-                    <Label className="text-primary">Phone Number</Label>
-                    <FormControl>
-                      <Input
-                        disabled={isLoading}
-                        placeholder="Enter Your Phone Number"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                name="address"
-                control={form.control}
-                render={({ field }) => (
-                  <FormItem>
-                    <Label className="text-primary">Address</Label>
-                    <FormControl>
-                      <Input
-                        disabled={isLoading}
-                        placeholder="Enter Your Full Address"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+
+              <div className="flex items-center justify-between gap-3">
+                <FormField
+                  name="email"
+                  control={form.control}
+                  render={({ field }) => (
+                    <FormItem>
+                      <Label className="text-primary">Email</Label>
+                      <FormControl>
+                        <Input
+                          disabled={isLoading}
+                          placeholder="Enter Your Email"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  name="phone"
+                  control={form.control}
+                  render={({ field }) => (
+                    <FormItem>
+                      <Label className="text-primary">Phone Number</Label>
+                      <FormControl>
+                        <Input
+                          disabled={isLoading}
+                          placeholder="Enter Your Phone Number"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
               <FormField
                 name="password"
                 control={form.control}
@@ -224,7 +209,6 @@ const Register = () => {
           </Link>
         </CardFooter>
       </Card>
-      <Activation message={data?.message} setOpen={setOpen} open={open} />
     </div>
   );
 };
