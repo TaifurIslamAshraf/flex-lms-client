@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 import Categorize from "./Categorize";
-import LoginRegisterBtn from "./LoginRegisterBtn";
+import Profile from "./Profile";
 import Search from "./Search";
 
 const Navbar = () => {
@@ -27,7 +27,7 @@ const Navbar = () => {
         </div>
       </div>
       <div className="">
-        <LoginRegisterBtn />
+        <Profile />
       </div>
     </div>
   );
