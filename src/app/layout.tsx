@@ -1,11 +1,26 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import {
+  Hind_Siliguri,
+  Inter,
+  Noto_Sans_Bengali as Noto,
+} from "next/font/google";
 import { Toaster } from "react-hot-toast";
 
 import ReduxProvider from "@/lib/reduxProvider";
+import { cn } from "@/lib/utils";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
+const bangli = Noto({
+  subsets: ["bengali"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-noto",
+});
+const hind_siliguri = Hind_Siliguri({
+  subsets: ["bengali"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-siliguri",
+});
 
 export const metadata: Metadata = {
   title: "Flex LMS",
@@ -19,7 +34,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body
+        className={cn(inter.className, bangli.variable, hind_siliguri.variable)}
+      >
         <ReduxProvider>
           {children}
           <Toaster position="top-center" reverseOrder={false} />
