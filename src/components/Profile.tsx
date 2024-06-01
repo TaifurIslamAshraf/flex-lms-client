@@ -21,8 +21,6 @@ const Profile = () => {
     return <LoginRegisterBtn />;
   }
 
-  console.log(user?.name);
-
   return (
     <div className="">
       {user?.name ? (
