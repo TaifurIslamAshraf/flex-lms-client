@@ -58,7 +58,7 @@ export const authApi = apiSlice.injectEndpoints({
 
     resetPassword: build.mutation({
       query: (data) => ({
-        url: "/user/reset-password",
+        url: "/auth/reset-password",
         method: "PUT",
         body: data,
         credentials: "include",
@@ -67,7 +67,7 @@ export const authApi = apiSlice.injectEndpoints({
 
     forgotPassword: build.mutation({
       query: ({ email }) => ({
-        url: "/user/forgot-password",
+        url: "/auth/forgot-password",
         method: "POST",
         body: { email: email },
 

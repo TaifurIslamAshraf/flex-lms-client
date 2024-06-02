@@ -30,13 +30,12 @@ const Profile = () => {
               className="rounded-full object-cover"
               src={
                 user.avatar
-                  ? `${serverUrl}/${user.avatar}`
+                  ? `${serverUrl}/${user?.avatar}`
                   : assests.defaultAvater
               }
               alt="default avater"
               height={40}
               width={40}
-              placeholder="blur"
             />
           </div>
         </Link>
