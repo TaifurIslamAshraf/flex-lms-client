@@ -3,8 +3,8 @@ import { assests } from "@/lib/assests";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import TextAnimation from "../TextAnim/TextAnimation";
-import { Button } from "../ui/button";
+import TextAnimation from "../../TextAnim/TextAnimation";
+import { Button } from "../../ui/button";
 
 const Banner = () => {
   return (

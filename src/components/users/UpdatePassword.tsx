@@ -67,12 +67,12 @@ const ChangePassword = () => {
   }, [error, form, isSuccess]);
 
   return (
-    <div className="pt-[120px]">
+    <div className="">
       <Card className="max-w-[500px] mx-auto">
         <CardHeader>
-          <CardTitle>Password</CardTitle>
+          <CardTitle>পাসওয়ার্ড পরিবর্তন</CardTitle>
           <CardDescription>
-            Change your password here. After saving, you&apos;ll be logged out.
+            আপনার পাসওয়ার্ডটি এখান থেকে পরিবর্তন করুন ।
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-2">
@@ -122,7 +122,7 @@ const ChangePassword = () => {
                 {isLoading ? (
                   <LoadingButton className="w-auto" btnText="saving" />
                 ) : (
-                  <Button type="submit">Save Password</Button>
+                  <Button type="submit">সেইভ পাসওয়ার্ড</Button>
                 )}
               </div>
             </form>
