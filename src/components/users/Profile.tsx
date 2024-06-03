@@ -27,12 +27,7 @@ const Profile = () => {
             <ProfilePicture avatar={user?.avatar} />
           </div>
 
-          <ProfileList
-            className="w-[400px] bg-white absolute shadow-lg -right-[500px] rounded-lg p-5 opacity-0 group-hover:opacity-100 group-hover:-right-6 duration-300"
-            avatar={user?.avatar}
-            phone={user?.phone}
-            name={user?.name}
-          />
+          <ProfileList className="w-[400px] bg-white absolute shadow-lg -right-[500px] rounded-lg p-5 opacity-0 group-hover:opacity-100 group-hover:-right-6 duration-300" />
         </div>
       ) : (
         <LoginRegisterBtn />
