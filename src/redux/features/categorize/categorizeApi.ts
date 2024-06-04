@@ -3,9 +3,8 @@ import { apiSlice } from "../apiSlice/apiSlice";
 export const categorizeApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
     getSubcategoryByCategory: build.query({
-      query: (category) => ({
-        url: "/subcategory/get-subcategory-by-category",
-        params: category,
+      query: ({ categoryId }) => ({
+        url: `/subcategory/get-subcategory-by-category/${categoryId}`,
         method: "GET",
       }),
     }),
