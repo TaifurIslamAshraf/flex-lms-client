@@ -17,7 +17,7 @@ const Banner = () => {
       <div className="flex-1 space-y-4">
         <TextAnimation
           text="লক্ষ্য হোক দক্ষ হওয়া!"
-          classes="lg:text-[3rem] lg:text-start lg:mt-0 mt-6 sm:text-[2.5rem] text-center text-[1.8rem] sm:text-center font-siliguri font-bold "
+          classes="lg:text-[3rem] lg:text-start lg:mt-0 mt-6 sm:text-[2.5rem] text-center text-[1.8rem] sm:text-center font-siliguri font-extrabold"
         />
 
         <p className="lg:text-lg lg:text-start sm:text-lg text-sm text-center">

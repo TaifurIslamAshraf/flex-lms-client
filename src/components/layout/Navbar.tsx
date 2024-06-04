@@ -27,7 +27,10 @@ const Navbar = () => {
           )}
         >
           <div className="flex items-center gap-14">
-            <Image src={assests.Logo} alt="Logo" height={35} width={170} />
+            <Link href={"/"}>
+              {" "}
+              <Image src={assests.Logo} alt="Logo" height={35} width={170} />
+            </Link>
 
             <div className="flex items-center gap-5">
               <Categorize />

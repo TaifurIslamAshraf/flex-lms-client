@@ -1,12 +1,16 @@
+import { getAllCategory } from "@/lib/_actions/category.action";
 import { assests } from "@/lib/assests";
+import { ICateogry } from "@/types/category";
 import Image from "next/image";
 import Link from "next/link";
 
-const Footer = () => {
+const Footer = async () => {
+  const category = await getAllCategory();
+
   return (
     <footer className="w-full">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3 gap-y-8 md:gap-8 py-10 max-w-sm mx-auto sm:max-w-3xl lg:max-w-full">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-3 gap-y-8 md:gap-8 py-10 max-w-sm mx-auto sm:max-w-3xl lg:max-w-full">
           <div className="col-span-full mb-10 lg:col-span-2 lg:mb-0">
             <Link href="#" className="flex justify-center lg:justify-start">
               <Image src={assests.Logo} alt="Logo" height={100} width={200} />
@@ -24,137 +28,102 @@ const Footer = () => {
             </a>
           </div>
 
-          <div className="lg:mx-auto text-left ">
+          <div className="lg:mx-auto text-left">
             <h4 className="text-lg text-gray-900 font-medium mb-7">
               কোর্স ক্যাটেগরি
             </h4>
             <ul className="text-sm  transition-all duration-500">
-              <li className="mb-6">
-                <a
-                  href="javascript:;"
-                  className="text-gray-600 hover:text-gray-900"
-                >
-                  Home
-                </a>
-              </li>
-              <li className="mb-6">
-                <a
-                  href="javascript:;"
-                  className=" text-gray-600 hover:text-gray-900"
-                >
-                  About
-                </a>
-              </li>
-              <li>
-                <a
-                  href="javascript:;"
-                  className=" text-gray-600 hover:text-gray-900"
-                >
-                  Pricing
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="lg:mx-auto text-left ">
-            <h4 className="text-lg text-gray-900 font-medium mb-7">Products</h4>
-            <ul className="text-sm  transition-all duration-500">
-              <li className="mb-6">
-                <a
-                  href="javascript:;"
-                  className="text-gray-600 hover:text-gray-900"
-                >
-                  Figma UI System
-                </a>
-              </li>
-              <li className="mb-6">
-                <a
-                  href="javascript:;"
-                  className=" text-gray-600 hover:text-gray-900"
-                >
-                  Icons Assets
-                </a>
-              </li>
-              <li>
-                <a
-                  href="javascript:;"
-                  className=" text-gray-600 hover:text-gray-900"
-                >
-                  Responsive Blocks
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="lg:mx-auto text-left ">
-            <h4 className="text-lg text-gray-900 font-medium mb-7">Support</h4>
-            <ul className="text-sm  transition-all duration-500">
-              <li className="mb-6">
-                <a
-                  href="javascript:;"
-                  className="text-gray-600 hover:text-gray-900"
-                >
-                  Customer Support
-                </a>
-              </li>
-              <li className="mb-6">
-                <a
-                  href="javascript:;"
-                  className=" text-gray-600 hover:text-gray-900"
-                >
-                  Terms & Conditions
-                </a>
-              </li>
-              <li>
-                <a
-                  href="javascript:;"
-                  className=" text-gray-600 hover:text-gray-900"
-                >
-                  Privacy Policy
-                </a>
-              </li>
+              {category?.data?.category &&
+                category?.data?.category?.map((item: ICateogry) => (
+                  <li className="mb-6" key={item._id}>
+                    <Link
+                      href={`/courses?category=${item?._id}`}
+                      className="text-gray-600 hover:text-gray-900"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
             </ul>
           </div>
 
           <div className="lg:mx-auto text-left ">
             <h4 className="text-lg text-gray-900 font-medium mb-7">
-              Subscribe
+              প্রয়োজনীয় লিঙ্ক
             </h4>
-            <p className="text-sm text-gray-500 leading-6 mb-7">
-              Subscribe to get the latest news from us
-            </p>
-            <a
-              href="javascript:;"
-              className="flex items-center justify-center gap-2 border border-indigo-600 rounded-full py-3 px-6 w-fit lg:mx-0  text-sm text-indigo-600 font-semibold transition-all duration-500 hover:bg-indigo-50"
-            >
-              Subscribe
-              <svg
-                width="15"
-                height="12"
-                viewBox="0 0 15 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1.25 6L13.25 6M9.5 10.5L13.4697 6.53033C13.7197 6.28033 13.8447 6.15533 13.8447 6C13.8447 5.84467 13.7197 5.71967 13.4697 5.46967L9.5 1.5"
-                  stroke="#4F46E5"
-                  stroke-width="1.8"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </a>
+            <ul className="text-sm  transition-all duration-500">
+              <li className="mb-6">
+                <Link
+                  href="javascript:;"
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  ব্লগ
+                </Link>
+              </li>
+              <li className="mb-6">
+                <Link
+                  href="javascript:;"
+                  className=" text-gray-600 hover:text-gray-900"
+                >
+                  স্টুডেন্ট ফিডব্যাক
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="javascript:;"
+                  className=" text-gray-600 hover:text-gray-900"
+                >
+                  আমাদের সাথে যোগাযোগ
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div className="lg:mx-auto text-left ">
+            <h4 className="text-lg text-gray-900 font-medium mb-7">লিগ্যাল</h4>
+            <ul className="text-sm  transition-all duration-500">
+              <li className="mb-6">
+                <a
+                  href="/trem-of-us"
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  ব্যবহার বিধি
+                </a>
+              </li>
+              <li className="mb-6">
+                <a href="faq" className=" text-gray-600 hover:text-gray-900">
+                  FAQ
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/privacy-policy"
+                  className=" text-gray-600 hover:text-gray-900"
+                >
+                  প্রাইভেসি পলিসি
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/about-us"
+                  className=" text-gray-600 hover:text-gray-900"
+                >
+                  আমাদের সম্পর্কে
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
 
         <div className="py-7 border-t border-gray-200">
           <div className="flex items-center justify-center flex-col lg:justify-between lg:flex-row">
             <span className="text-sm text-gray-500 ">
-              ©<a href="https://pagedone.io/">pagedone</a> 2024, All rights
-              reserved.
+              ©<a href="/">bright skill</a> 2024, All rights reserved.
             </span>
+
+            {/* icon */}
             <div className="flex mt-4 space-x-4 sm:justify-center lg:mt-0 ">
-              <a
+              <Link
                 href="javascript:;"
                 className="w-8 h-8 rounded-full transition-all duration-500 flex justify-center items-center bg-[#33CCFF] hover:bg-gray-900"
               >
@@ -173,8 +142,8 @@ const Footer = () => {
                     />
                   </g>
                 </svg>
-              </a>
-              <a
+              </Link>
+              <Link
                 href="javascript:;"
                 className="relative w-8 h-8 rounded-full transition-all duration-500 flex justify-center items-center bg-[linear-gradient(45deg,#FEE411_6.9%,#FEDB16_10.98%,#FEC125_17.77%,#FE983D_26.42%,#FE5F5E_36.5%,#FE2181_46.24%,#9000DC_85.57%)]  hover:bg-gradient-to-b from-gray-900 to-gray-900  
                         "
@@ -190,8 +159,8 @@ const Footer = () => {
                     fill="white"
                   />
                 </svg>
-              </a>
-              <a
+              </Link>
+              <Link
                 href="javascript:;"
                 className="relative w-8 h-8 rounded-full transition-all duration-500 flex justify-center items-center bg-[#337FFF]  hover:bg-gray-900 "
               >
@@ -206,8 +175,8 @@ const Footer = () => {
                     fill="currentColor"
                   />
                 </svg>
-              </a>
-              <a
+              </Link>
+              <Link
                 href="javascript:;"
                 className="relative w-8 h-8 rounded-full transition-all duration-500 flex justify-center items-center bg-[#FF0000]  hover:bg-gray-900 "
               >
@@ -224,7 +193,7 @@ const Footer = () => {
                     fill="white"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
