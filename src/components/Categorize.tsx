@@ -28,7 +28,6 @@ const Categorize = () => {
   const handleCategory = (id: string) => {
     setCategoryId(id);
   };
-  console.log(data?.data?.subcategory);
 
   return (
     <NavigationMenu>
@@ -37,7 +36,7 @@ const Categorize = () => {
           <NavigationMenuTrigger className="bg-primary-foreground hover:bg-primary hover:text-secondary font-noto font-semibold text-[1rem]">
             সকল ক্যাটাগরি
           </NavigationMenuTrigger>
-          <NavigationMenuContent className=" p-4 max-h-[100vh]">
+          <NavigationMenuContent className=" p-4 max-h-[85vh] overflow-y-auto">
             <div className="flex justify-between">
               <div className="overflow-y-auto min-w-[250px]">
                 {category?.data?.category &&
@@ -59,7 +58,8 @@ const Categorize = () => {
                     </div>
                   ))}
               </div>
-              <div className="">
+
+              <div className="overflow-y-auto overflow-x-hidden">
                 {data?.data?.subcategory &&
                   data?.data?.subcategory?.map((item: ISubcategory) => (
                     <div className="" key={item._id}>
@@ -77,6 +77,7 @@ const Categorize = () => {
                             <Link
                               href={`/courses/${courseItem?.slug}`}
                               key={courseItem?._id}
+                              className=""
                             >
                               <div className="flex gap-3 w-[330px] border border-muted shadow-sm m-2 rounded-lg hover:bg-secondary">
                                 <Image
