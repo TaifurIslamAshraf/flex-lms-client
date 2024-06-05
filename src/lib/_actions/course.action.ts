@@ -16,3 +16,17 @@ export const getRandomCourses = async () => {
     console.log(error);
   }
 };
+export const getRandomCategoryCourses = async () => {
+  try {
+    const res = await fetch(`${serverApi}/course/random-category-courses`, {
+      next: { tags: ["Course"] },
+      cache: "no-store",
+    });
+
+    const course = await res.json();
+
+    return course;
+  } catch (error) {
+    console.log(error);
+  }
+};
