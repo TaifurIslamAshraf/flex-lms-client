@@ -1,5 +1,3 @@
-"use server";
-
 import { serverApi } from "../utils";
 
 export const getAllCategory = async () => {

@@ -1,5 +1,6 @@
 import { styles } from "@/app/styles";
-import { getRandomCourses } from "@/lib/_actions/course.action";
+import CourseCard from "@/components/course/CourseCard";
+import { getRandomCourses } from "@/lib/fetch/course.data";
 import { cn, serverUrl } from "@/lib/utils";
 import { ICourse } from "@/types/courses";
 import Image from "next/image";
@@ -74,31 +75,13 @@ const RandomCourse = async () => {
               )}
             </div>
 
-            <div className="grid md:grid-cols-2 md:grid-rows-6 gap-4">
+            <div className="grid md:grid-cols-2 gap-4">
               {courses?.data?.slice(1)?.map((item: ICourse) => (
-                <Link href={`/courses/${item?.slug}`} key={item._id}>
-                  <div className="p-3 shadow-xl shadow-slate-200 rounded-xl hover:shadow-md transition-all">
-                    <Image
-                      src={`${serverUrl}/${item.thumbnail}`}
-                      alt={item.slug}
-                      height={250}
-                      width={250}
-                      className="w-full h-auto rounded-xl"
-                    />
-
-                    <div className="space-y-3">
-                      <h1 className="mt-3 font-semibold">{item.name}</h1>
-                      <div className="flex items-center justify-end gap-3 ">
-                        <h2 className="line-through md:text-lg text-base text-muted-foreground font-semibold">
-                          {item.estimatedPrice} টাকা
-                        </h2>
-                        <h2 className="md:text-xl text-lg text-primary font-semibold">
-                          {item.price} টাকা
-                        </h2>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
+                <CourseCard
+                  containerClass="p-3 shadow-xl shadow-slate-200 rounded-xl hover:shadow-md transition-all"
+                  item={item}
+                  key={item?._id}
+                />
               ))}
             </div>
           </>

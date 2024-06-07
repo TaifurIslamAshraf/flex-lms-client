@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import {
   Hind_Siliguri,
-  Inter,
   Noto_Sans_Bengali as Noto,
+  Poppins,
 } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 
@@ -10,7 +10,10 @@ import ReduxProvider from "@/lib/reduxProvider";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppin = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+});
 const bangli = Noto({
   subsets: ["bengali"],
   weight: ["300", "400", "500", "600", "700", "800"],
@@ -35,7 +38,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={cn(inter.className, bangli.variable, hind_siliguri.variable)}
+        className={cn(
+          poppin.className,
+          bangli.variable,
+          hind_siliguri.variable
+        )}
       >
         <ReduxProvider>
           {children}

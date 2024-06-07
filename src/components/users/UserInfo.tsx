@@ -17,6 +17,7 @@ import { cn, serverUrl } from "@/lib/utils";
 import ComponentLoader from "@/components/ComponentLoader";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
+import { customRevalidateTag } from "@/lib/_actions/revalidateTag";
 import {
   useUpdateProfileMutation,
   useUpdateUserInfoMutation,
@@ -72,6 +73,7 @@ const UserInfo = () => {
     };
 
     await updateUserInfo(updatedPayload);
+    await customRevalidateTag("Single_Course");
   };
 
   //side effects
