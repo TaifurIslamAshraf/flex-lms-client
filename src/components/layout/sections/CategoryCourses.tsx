@@ -1,5 +1,5 @@
 import { styles } from "@/app/styles";
-import CourseCard from "@/components/CourseCard";
+import CourseCard from "@/components/course/CourseCard";
 import {
   Carousel,
   CarouselContent,
@@ -8,7 +8,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Separator } from "@/components/ui/separator";
-import { getRandomCategoryCourses } from "@/lib/_actions/course.action";
+import { getRandomCategoryCourses } from "@/lib/fetch/course.data";
 import { cn } from "@/lib/utils";
 import { ICategoryCourse } from "@/types/courses";
 
@@ -47,8 +47,8 @@ const CategoryCourses = async () => {
                         </CarouselItem>
                       ))}
                   </CarouselContent>
-                  <CarouselPrevious className="absolute top-1/2 -left-4 w-[40px] h-[40px] hover:text-primary" />
-                  <CarouselNext className="absolute top-1/2 -right-4 w-[40px] h-[40px] hover:text-primary" />
+                  <CarouselPrevious className="absolute top-1/2 -left-6 w-[40px] h-[40px] hover:text-primary" />
+                  <CarouselNext className="absolute top-1/2 -right-6 w-[40px] h-[40px] hover:text-primary" />
                 </Carousel>
               </div>
             )}
