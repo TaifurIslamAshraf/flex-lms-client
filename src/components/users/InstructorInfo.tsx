@@ -4,7 +4,7 @@ import { IinstructorInfo } from "@/types/user";
 import ProfilePicture from "./ProfilePicture";
 
 const InstructorInfo = ({ info }: { info: IinstructorInfo }) => {
-  console.log(info);
+  console.log("ddddd", info);
   return (
     <div
       className={cn(

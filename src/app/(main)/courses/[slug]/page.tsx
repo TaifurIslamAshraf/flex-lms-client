@@ -1,7 +1,6 @@
 import { styles } from "@/app/styles";
 import YoutubeVideo from "@/components/YoutubeVideo";
 import CourseCurriculum from "@/components/course/CourseCurriculum";
-import InstructorInfo from "@/components/users/InstructorInfo";
 import { getSingleCourse } from "@/lib/fetch/course.data";
 import { cn, extractVideoID } from "@/lib/utils";
 import { ISingleCourse } from "@/types/courses";
@@ -16,7 +15,7 @@ const SingleCourse = async ({ params }: Props) => {
     params.slug
   );
   const videoId = extractVideoID(course?.demoUrl);
-  console.log(course);
+
   return (
     <>
       <div
@@ -77,7 +76,6 @@ const SingleCourse = async ({ params }: Props) => {
           </div>
         </div>
       )}
-      <InstructorInfo info={course?.instructor} />
     </>
   );
 };
