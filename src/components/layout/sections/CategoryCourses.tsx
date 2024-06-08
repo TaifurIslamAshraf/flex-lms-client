@@ -8,7 +8,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Separator } from "@/components/ui/separator";
-import { getRandomCategoryCourses } from "@/lib/fetch/course.data";
+import { getRandomCategoryCourses } from "@/lib/_actions/course.action";
 import { cn } from "@/lib/utils";
 import { ICategoryCourse } from "@/types/courses";
 

@@ -6,7 +6,7 @@ import {
   useGetAllCategoryQuery,
   useGetSubcategoryByCategoryQuery,
 } from "@/redux/features/categorize/categorizeApi";
-import { ICateogry, ISubcategory } from "@/types/category";
+import { ICateogry, ICourseSubcategory } from "@/types/category";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -61,7 +61,7 @@ const Categorize = () => {
 
               <div className="overflow-y-auto overflow-x-hidden">
                 {data?.data?.subcategory &&
-                  data?.data?.subcategory?.map((item: ISubcategory) => (
+                  data?.data?.subcategory?.map((item: ICourseSubcategory) => (
                     <div className="" key={item._id}>
                       {item?.courses && item?.courses?.length > 0 ? (
                         <div className="max-w-[650px] w-full ml-6 py-3 space-y-2">

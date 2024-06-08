@@ -1,3 +1,5 @@
+"use server";
+
 import { serverApi } from "../utils";
 
 export const getRandomCourses = async () => {
@@ -33,6 +35,19 @@ export const getSingleCourse = async (slug: string) => {
   try {
     const res = await fetch(`${serverApi}/course/single-course/${slug}`, {
       next: { tags: ["Course", "Single_Course"] },
+    });
+
+    const course = await res.json();
+    return course;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllCourses = async () => {
+  try {
+    const res = await fetch(`${serverApi}/course/all-courses`, {
+      next: { tags: ["Course"] },
     });
 
     const course = await res.json();

@@ -14,8 +14,18 @@ export const categorizeApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+
+    getSubcategory: build.query({
+      query: () => ({
+        url: "/subcategory/get-all-subcategory",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useGetSubcategoryByCategoryQuery, useGetAllCategoryQuery } =
-  categorizeApi;
+export const {
+  useGetSubcategoryByCategoryQuery,
+  useGetAllCategoryQuery,
+  useGetSubcategoryQuery,
+} = categorizeApi;

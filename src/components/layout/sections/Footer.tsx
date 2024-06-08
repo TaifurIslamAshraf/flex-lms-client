@@ -1,5 +1,5 @@
+import { getAllCategory } from "@/lib/_actions/category.action";
 import { assests } from "@/lib/assests";
-import { getAllCategory } from "@/lib/fetch/category.data";
 import { ICateogry } from "@/types/category";
 import Image from "next/image";
 import Link from "next/link";

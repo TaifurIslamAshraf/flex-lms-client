@@ -1,6 +1,6 @@
 import { styles } from "@/app/styles";
 import CourseCard from "@/components/course/CourseCard";
-import { getRandomCourses } from "@/lib/fetch/course.data";
+import { getRandomCourses } from "@/lib/_actions/course.action";
 import { cn, serverUrl } from "@/lib/utils";
 import { ICourse } from "@/types/courses";
 import Image from "next/image";

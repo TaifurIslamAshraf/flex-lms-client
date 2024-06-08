@@ -6,7 +6,7 @@ export interface ICateogry {
   updatedAt: string;
 }
 
-export interface ISubcategory {
+export interface ICourseSubcategory {
   courses?: [
     {
       name: string;
@@ -20,3 +20,13 @@ export interface ISubcategory {
   _id: string;
 }
 [];
+
+export interface ISubCategory {
+  category: string;
+  createdAt: string;
+  _id: string;
+  name: string;
+  slug: string;
+  updatedAt: string;
+  _v: number;
+}

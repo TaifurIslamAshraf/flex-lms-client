@@ -25,13 +25,13 @@ const CourseCurriculum = ({ courseData }: { courseData: ICourseData[] }) => {
   return (
     <div
       className={cn(
-        styles.paddingY,
         styles.layout,
-        "bg-muted px-[4rem] md:px-[8rem]"
+        styles.paddingY,
+        "bg-muted  pb-6 md:px-[3rem] lg:px-[4rem] px-[1rem] xl:px-[8rem]"
       )}
     >
       <div className="flex items-center justify-between mb-10">
-        <h1 className="font-semibold font-siliguri text-2xl">
+        <h1 className="font-semibold font-siliguri lg:text-2xl md:text-xl text-lg">
           কোর্স কারিকুলাম
         </h1>
         <div className="flex items-center justify-center text-center gap-6">
@@ -50,9 +50,9 @@ const CourseCurriculum = ({ courseData }: { courseData: ICourseData[] }) => {
       <div className="">
         <div className="">
           {uniqueSections.map((section, i) => (
-            <Accordion key={i} type="single" collapsible className="">
+            <Accordion key={i + 10} type="single" collapsible className="">
               <AccordionItem value={`item-${i}`} className="mb-5 border-none">
-                <AccordionTrigger className="shadow-md bg-white px-4 hover:no-underline">
+                <AccordionTrigger className="lg:shadow-md shadow-sm bg-white px-4 hover:no-underline">
                   <div className=" flex items-center gap-8">
                     <h1>{section}</h1>
                     <h2 className="text-primary">
@@ -64,7 +64,7 @@ const CourseCurriculum = ({ courseData }: { courseData: ICourseData[] }) => {
                   {courseData
                     .filter((item) => item.videoSection === section)
                     .map((item, index) => (
-                      <ul className="" key={item._id}>
+                      <ul className="" key={index}>
                         <div>
                           <div className="flex items-center gap-4 my-5">
                             <CirclePlay className="text-primary" size={20} />
