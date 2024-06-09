@@ -25,10 +25,10 @@ const CourseCard = ({
           <h1 className="mt-3 font-semibold">{item.name}</h1>
           <div className="flex items-center justify-end gap-3">
             <h2 className="line-through md:text-lg text-base text-muted-foreground font-semibold">
-              {item.estimatedPrice} টাকা
+              {item?.estimatedPrice} টাকা
             </h2>
             <h2 className="md:text-xl text-lg text-primary font-semibold">
-              {item.price} টাকা
+              {item?.price} টাকা
             </h2>
           </div>
         </div>

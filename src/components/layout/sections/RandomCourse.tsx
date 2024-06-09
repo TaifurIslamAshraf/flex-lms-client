@@ -5,7 +5,6 @@ import { cn, serverUrl } from "@/lib/utils";
 import { ICourse } from "@/types/courses";
 import Image from "next/image";
 import Link from "next/link";
-
 const RandomCourse = async () => {
   const courses = await getRandomCourses();
   return (

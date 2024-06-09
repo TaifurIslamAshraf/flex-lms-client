@@ -2,7 +2,7 @@ import { IinstructorInfo } from "./user";
 
 export interface ICourse {
   _id: string;
-  instructor: string;
+  instructor: string | any;
   name: string;
   slug: string;
   description: string;
@@ -11,8 +11,8 @@ export interface ICourse {
   thumbnail: string;
   rating: number;
   reviews: any[];
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
   __v: number;
 }
 
@@ -78,3 +78,13 @@ export type ICardCourse = Omit<
   | "rating"
   | "reviews"
 >;
+
+export interface ICourseQueryProps {
+  page?: string;
+  limit?: string;
+  category?: string;
+  subcategory?: string;
+  search?: string;
+  price?: string;
+  level?: string;
+}

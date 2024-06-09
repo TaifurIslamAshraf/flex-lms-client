@@ -4,11 +4,17 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { getAllCategory } from "@/lib/_actions/category.action";
+import { cn } from "@/lib/utils";
 import { ICateogry } from "@/types/category";
 import Link from "next/link";
 
-const CategoryCarusel = async () => {
+type Props = {
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
+
+const CategoryCarusel = async ({ searchParams }: Props) => {
   const data = await getAllCategory();
+  const categoryParams = searchParams?.category as string;
 
   const category = data?.data?.category as ICateogry[];
 
@@ -19,7 +25,10 @@ const CategoryCarusel = async () => {
           <CarouselItem key={items._id} className="basis-auto">
             <Link
               href={`/courses?category=${items?._id}`}
-              className="text-muted-foreground p-2 bg-muted  hover:text-black transition-all rounded-md"
+              className={cn(
+                "text-muted-foreground p-2 bg-muted  hover:text-black transition-all rounded-md",
+                categoryParams === items?._id && "text-primary"
+              )}
             >
               {items?.name}
             </Link>

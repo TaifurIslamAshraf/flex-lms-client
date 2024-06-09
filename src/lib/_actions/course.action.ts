@@ -1,5 +1,6 @@
 "use server";
 
+import { ICourseQueryProps } from "@/types/courses";
 import { serverApi } from "../utils";
 
 export const getRandomCourses = async () => {
@@ -44,11 +45,22 @@ export const getSingleCourse = async (slug: string) => {
   }
 };
 
-export const getAllCourses = async () => {
+export const getAllCourses = async ({
+  page = "1",
+  limit = "10",
+  category = "",
+  subcategory = "",
+  search = "",
+  price = "",
+  level = "",
+}: ICourseQueryProps) => {
   try {
-    const res = await fetch(`${serverApi}/course/all-courses`, {
-      next: { tags: ["Course"] },
-    });
+    const res = await fetch(
+      `${serverApi}/course/all-courses?page=${page}&price=${price}&limit=${limit}&category=${category}&subcategory=${subcategory}&search=${search}&level=${level}`,
+      {
+        next: { tags: ["Course"] },
+      }
+    );
 
     const course = await res.json();
     return course;
