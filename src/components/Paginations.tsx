@@ -11,14 +11,14 @@ import { FC } from "react";
 
 interface Props {
   pagination: {
-    numberOfCourse: number;
+    numberOfCourse?: number;
     totalPage: number;
     currentPage: number;
-    nextPage: number;
-    prevPage: number;
+    nextPage: number | null;
+    prevPage: number | null;
   };
   category?: string;
-  type: "all" | "user";
+  type: "allCourse" | "userCourse";
 }
 
 const Paginations: FC<Props> = ({ pagination, category, type }) => {
@@ -27,13 +27,13 @@ const Paginations: FC<Props> = ({ pagination, category, type }) => {
   const nextPage = pagination?.totalPage === 1 ? 1 : pagination?.nextPage;
 
   const paginationNextPage =
-    type === "user"
-      ? `/courses?subcategory=${category}&&page=${nextPage}`
+    type === "allCourse"
+      ? `/courses?page=${nextPage}`
       : `/dashboard/courses?page=${nextPage}`;
 
   const paginationPrevPage =
-    type === "user"
-      ? `/courses?subcategory=${category}&&page=${pagination?.prevPage}`
+    type === "userCourse"
+      ? `/courses?page=${pagination?.prevPage}`
       : `/dashboard/courses?page=${pagination?.prevPage}`;
 
   return (
@@ -48,7 +48,7 @@ const Paginations: FC<Props> = ({ pagination, category, type }) => {
             <PaginationItem key={index}>
               <PaginationLink
                 href={
-                  type === "all"
+                  type === "allCourse"
                     ? `/courses?page=${index + 1}`
                     : `/dashboard/courses?page=${index + 1}`
                 }

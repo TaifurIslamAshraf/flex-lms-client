@@ -22,7 +22,7 @@ const CategoryCourses = async () => {
           <div className="" key={item?._id}>
             {item.courses?.length > 0 && (
               <div className="">
-                <h1 className="text-2xl font-semibold my-3 uppercase">
+                <h1 className="text-xl lg:text-2xl font-semibold my-3 uppercase">
                   {item?.name}
                 </h1>
                 <Separator className="mb-4" />
@@ -33,7 +33,7 @@ const CategoryCourses = async () => {
                     align: "center",
                   }}
                 >
-                  <CarouselContent className="px-6 py-4">
+                  <CarouselContent className="md:px-6 md:py-4 px-2 py-0">
                     {item?.courses?.length > 0 &&
                       item?.courses?.map((courseItem) => (
                         <CarouselItem
@@ -47,8 +47,8 @@ const CategoryCourses = async () => {
                         </CarouselItem>
                       ))}
                   </CarouselContent>
-                  <CarouselPrevious className="absolute top-1/2 -left-6 w-[40px] h-[40px] hover:text-primary" />
-                  <CarouselNext className="absolute top-1/2 -right-6 w-[40px] h-[40px] hover:text-primary" />
+                  <CarouselPrevious className="absolute top-1/2 -left-6 w-[40px] h-[40px] hover:text-primary md:block hidden" />
+                  <CarouselNext className="absolute top-1/2 -right-6 w-[40px] h-[40px] hover:text-primary md:block hidden" />
                 </Carousel>
               </div>
             )}

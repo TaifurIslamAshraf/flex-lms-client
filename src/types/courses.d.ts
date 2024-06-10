@@ -88,3 +88,10 @@ export interface ICourseQueryProps {
   price?: string;
   level?: string;
 }
+
+export interface IPagination {
+  totalPage: number;
+  currentPage: number;
+  nextPage: number | null;
+  prevPage: number | null;
+}
