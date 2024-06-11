@@ -6,6 +6,7 @@ import {
 } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 
+import NextAuthProvider from "@/lib/Provider";
 import ReduxProvider from "@/lib/reduxProvider";
 import { cn } from "@/lib/utils";
 import "./globals.css";
@@ -34,14 +35,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={cn(inter.className, bangli.variable, hind_siliguri.variable)}
-      >
-        <ReduxProvider>
-          {children}
-          <Toaster position="top-center" reverseOrder={false} />
-        </ReduxProvider>
-      </body>
+      <NextAuthProvider>
+        <body
+          className={cn(
+            inter.className,
+            bangli.variable,
+            hind_siliguri.variable
+          )}
+        >
+          <ReduxProvider>
+            {children}
+            <Toaster position="top-center" reverseOrder={false} />
+          </ReduxProvider>
+        </body>
+      </NextAuthProvider>
     </html>
   );
 }
