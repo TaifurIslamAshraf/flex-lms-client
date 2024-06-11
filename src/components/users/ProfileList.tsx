@@ -1,5 +1,3 @@
-"use client";
-
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { IuserList } from "@/types/user";
@@ -36,10 +34,12 @@ const ProfileList = ({ className }: IuserList) => {
   return (
     <div className={cn(className)}>
       <div className="md:flex block gap-6 items-center">
-        <ProfilePicture avatar={user?.avatar} height={50} width={50} />
+        <ProfilePicture avatar={session?.user?.avatar} height={50} width={50} />
         <div className="">
-          <h1 className="font-bold text-xl uppercase">{user?.name}</h1>
-          <p className="text-muted-foreground">Mobile: {user?.phone}</p>
+          <h1 className="font-bold text-xl uppercase">{session?.user?.name}</h1>
+          <p className="text-muted-foreground">
+            Mobile: {session?.user?.phone}
+          </p>
         </div>
       </div>
       <Separator className="my-6" />
