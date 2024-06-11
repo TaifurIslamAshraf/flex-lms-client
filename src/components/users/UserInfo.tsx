@@ -17,6 +17,7 @@ import { cn, serverUrl } from "@/lib/utils";
 import ComponentLoader from "@/components/ComponentLoader";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
+import { customRevalidateTag } from "@/lib/_actions/revalidateTag";
 import {
   useUpdateProfileMutation,
   useUpdateUserInfoMutation,
@@ -27,7 +28,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 
-const AccountInfo = () => {
+const UserInfo = () => {
   const { user } = useSelector((state: any) => state.auth);
   const [name, setName] = useState<string>();
   const [phone, setPhone] = useState<string>();
@@ -72,6 +73,7 @@ const AccountInfo = () => {
     };
 
     await updateUserInfo(updatedPayload);
+    await customRevalidateTag("Single_Course");
   };
 
   //side effects
@@ -124,8 +126,8 @@ const AccountInfo = () => {
   }
 
   return (
-    <div className="pt-[120px]">
-      <Card className="max-w-[500px] mx-auto ">
+    <div className="">
+      <Card className="">
         <CardHeader className="w-full flex justify-center">
           <div className="relative">
             <Image
@@ -179,48 +181,50 @@ const AccountInfo = () => {
             <Label htmlFor="email">Email</Label>
             <Input defaultValue={user?.email} readOnly disabled />
           </div>
+
           <div className="flex items-center justify-between gap-3">
             <div className="space-y-1">
-              <Label htmlFor="phone">Phone Number</Label>
+              <Label htmlFor="fatherName">Father Name</Label>
               <Input
-                id="phone"
-                value={phone}
+                id="fatherName"
+                value={fatherName}
                 disabled={updateIsLoading}
-                onChange={(e) => setPhone(e.target.value)}
+                placeholder="Enter Your Father Name"
+                onChange={(e) => setFatherName(e.target.value)}
               />
             </div>
             <div className="space-y-1">
-              <Label htmlFor="address">Address</Label>
+              <Label htmlFor="motherName">Mother Name</Label>
               <Input
-                id="address"
-                value={address}
+                id="motherName"
+                value={motherName}
+                placeholder="Enter Your Mother Name"
                 disabled={updateIsLoading}
-                placeholder="Enter Your Address"
-                onChange={(e) => setAddress(e.target.value)}
+                onChange={(e) => setMotherName(e.target.value)}
               />
             </div>
           </div>
 
           <div className="space-y-1">
-            <Label htmlFor="fatherName">Father Name</Label>
+            <Label htmlFor="phone">Phone Number</Label>
             <Input
-              id="fatherName"
-              value={fatherName}
+              id="phone"
+              value={phone}
               disabled={updateIsLoading}
-              placeholder="Enter Your Father Name"
-              onChange={(e) => setFatherName(e.target.value)}
+              onChange={(e) => setPhone(e.target.value)}
             />
           </div>
           <div className="space-y-1">
-            <Label htmlFor="motherName">Mother Name</Label>
+            <Label htmlFor="address">Address</Label>
             <Input
-              id="motherName"
-              value={motherName}
-              placeholder="Enter Your Mother Name"
+              id="address"
+              value={address}
               disabled={updateIsLoading}
-              onChange={(e) => setMotherName(e.target.value)}
+              placeholder="Enter Your Address"
+              onChange={(e) => setAddress(e.target.value)}
             />
           </div>
+
           <div className="flex items-center justify-between gap-3">
             <div className="space-y-1">
               <Label htmlFor="district">District</Label>
@@ -278,7 +282,7 @@ const AccountInfo = () => {
           {updateIsLoading ? (
             <LoadingButton className="w-auto" />
           ) : (
-            <Button onClick={handleName}>Save changes</Button>
+            <Button onClick={handleName}>সেইভ পরিবর্তন</Button>
           )}
         </CardFooter>
       </Card>
@@ -286,4 +290,4 @@ const AccountInfo = () => {
   );
 };
 
-export default AccountInfo;
+export default UserInfo;
