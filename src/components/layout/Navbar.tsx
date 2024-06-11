@@ -1,5 +1,3 @@
-"use client";
-
 import { styles } from "@/app/styles";
 import { assests } from "@/lib/assests";
 import { cn } from "@/lib/utils";
@@ -7,15 +5,12 @@ import Image from "next/image";
 
 import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
 import Categorize from "../Categorize";
 import Search from "../Search";
 import Profile from "../users/Profile";
 import MobileNav from "./MobileNav";
 
 const Navbar = () => {
-  const [cartItem, setCartItem] = useState(2);
-
   return (
     <>
       <div className="lg:block hidden">
@@ -42,7 +37,7 @@ const Navbar = () => {
               <Link href={"/cart"} className="relative">
                 <ShoppingCart size={30} className="hover:text-primary " />
                 <div className="w-[18px] h-[18px] rounded-full bg-primary flex items-center flex-col justify-center text-secondary font-bold text-sm absolute -top-1 -right-1">
-                  {cartItem}
+                  {0}
                 </div>
               </Link>
             </div>

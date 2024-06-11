@@ -1,15 +1,9 @@
-"use client";
-
 import { Separator } from "@/components/ui/separator";
+import { authOptions } from "@/lib/auth";
 import { cn } from "@/lib/utils";
-import { useLogoutQuery } from "@/redux/features/auth/authApi";
 import { IuserList } from "@/types/user";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
-import LoginRegisterBtn from "./LoginRegisterBtn";
 import ProfilePicture from "./ProfilePicture";
 
 const profileListLink = [
@@ -36,41 +30,27 @@ const profileListLink = [
   },
 ];
 
-const ProfileList = ({ className }: IuserList) => {
-  const [isLogout, setIsLogout] = useState(false);
-  const router = useRouter();
+const ProfileList = async ({ className }: IuserList) => {
+  // const handleLogout = (item: { name: string; path: string }) => {
+  //   if (item.path === "/") {
+  //     toast.success("Logout successfull");
+  //     setIsLogout(true);
+  //     router.replace("/");
+  //     window.location.reload();
+  //   }
+  // };
 
-  const { user } = useSelector((state: any) => state.auth);
-  const [isMounded, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  const {} = useLogoutQuery(undefined, {
-    skip: !isLogout,
-  });
-
-  if (!isMounded) {
-    return <LoginRegisterBtn />;
-  }
-
-  const handleLogout = (item: { name: string; path: string }) => {
-    if (item.path === "/") {
-      toast.success("Logout successfull");
-      setIsLogout(true);
-      router.replace("/");
-      window.location.reload();
-    }
-  };
+  const session = await getServerSession(authOptions);
 
   return (
     <div className={cn(className)}>
       <div className="md:flex block gap-6 items-center">
-        <ProfilePicture avatar={user?.avatar} height={50} width={50} />
+        <ProfilePicture avatar={session?.user?.avatar} height={50} width={50} />
         <div className="">
-          <h1 className="font-bold text-xl uppercase">{user?.name}</h1>
-          <p className="text-muted-foreground">Mobile: {user?.phone}</p>
+          <h1 className="font-bold text-xl uppercase">{session?.user?.name}</h1>
+          <p className="text-muted-foreground">
+            Mobile: {session?.user?.phone}
+          </p>
         </div>
       </div>
       <Separator className="my-6" />
@@ -78,7 +58,7 @@ const ProfileList = ({ className }: IuserList) => {
         {profileListLink.map((item, i) => (
           <div className="mb-4" key={i}>
             <Link
-              onClick={() => handleLogout(item)}
+              // onClick={() => handleLogout(item)}
               className="font-noto text-lg"
               href={item.path}
             >

@@ -3,7 +3,7 @@ import CategoryCourses from "@/components/layout/sections/CategoryCourses";
 import Footer from "@/components/layout/sections/Footer";
 import RandomCourse from "@/components/layout/sections/RandomCourse";
 
-export default function Home() {
+export default async function Home() {
   return (
     <main className="">
       <Banner />

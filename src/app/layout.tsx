@@ -38,20 +38,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <NextAuthProvider>
-        <body
-          className={cn(
-            poppin.className,
-            bangli.variable,
-            hind_siliguri.variable
-          )}
-        >
+      <body
+        className={cn(
+          poppin.className,
+          bangli.variable,
+          hind_siliguri.variable
+        )}
+      >
+        <NextAuthProvider>
           <ReduxProvider>
             {children}
             <Toaster position="top-center" reverseOrder={false} />
           </ReduxProvider>
-        </body>
-      </NextAuthProvider>
+        </NextAuthProvider>
+      </body>
     </html>
   );
 }
