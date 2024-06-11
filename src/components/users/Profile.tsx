@@ -1,14 +1,18 @@
 "use client";
 
-import { useSelector } from "react-redux";
-
 import LoginRegisterBtn from "@/components/users/LoginRegisterBtn";
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import ProfileList from "./ProfileList";
 import ProfilePicture from "./ProfilePicture";
 
 const Profile = () => {
-  const { user } = useSelector((state: any) => state.auth);
+  // const { user } = useSelector((state: any) => state.auth);
+
+  const { data: session } = useSession();
+
+  const user: any = session?.user;
+
   const [isMounded, setIsMounted] = useState(false);
 
   useEffect(() => {
