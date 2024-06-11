@@ -4,7 +4,10 @@ import { cn } from "@/lib/utils";
 import { IuserList } from "@/types/user";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
+<<<<<<< HEAD
 import Logout from "./Logout";
+=======
+>>>>>>> 298d295 ([change] auth functionality)
 import ProfilePicture from "./ProfilePicture";
 
 const profileListLink = [
@@ -28,6 +31,18 @@ const profileListLink = [
 ];
 
 const ProfileList = async ({ className }: IuserList) => {
+<<<<<<< HEAD
+=======
+  // const handleLogout = (item: { name: string; path: string }) => {
+  //   if (item.path === "/") {
+  //     toast.success("Logout successfull");
+  //     setIsLogout(true);
+  //     router.replace("/");
+  //     window.location.reload();
+  //   }
+  // };
+
+>>>>>>> 298d295 ([change] auth functionality)
   const session = await getServerSession(authOptions);
 
   return (
@@ -45,7 +60,15 @@ const ProfileList = async ({ className }: IuserList) => {
       <div className="">
         {profileListLink.map((item, i) => (
           <div className="mb-4" key={i}>
+<<<<<<< HEAD
             <Link className="font-noto text-lg" href={item.path}>
+=======
+            <Link
+              // onClick={() => handleLogout(item)}
+              className="font-noto text-lg"
+              href={item.path}
+            >
+>>>>>>> 298d295 ([change] auth functionality)
               {item.name}
             </Link>
           </div>

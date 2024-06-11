@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { LoadingButton } from "@/components/LoaderButton";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -24,12 +23,18 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+<<<<<<< HEAD
 import { updateUser } from "@/redux/features/auth/authSlice";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
+=======
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+>>>>>>> 298d295 ([change] auth functionality)
 
 const loginFormSchema = z.object({
   email: z.string().min(1, "Email is required").email("Invalid email address"),
@@ -41,9 +46,13 @@ const loginFormSchema = z.object({
 
 const Login = () => {
   const router = useRouter();
+<<<<<<< HEAD
   const dispatch = useDispatch();
   const session = useSession();
   const [isLoading, setIsLoading] = useState(false);
+=======
+  // const { user } = useSelector((state: any) => state.auth);
+>>>>>>> 298d295 ([change] auth functionality)
 
   const form = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
@@ -52,6 +61,10 @@ const Login = () => {
       password: "",
     },
   });
+<<<<<<< HEAD
+=======
+  // const [login, { isLoading, error, isSuccess }] = useLoginMutation();
+>>>>>>> 298d295 ([change] auth functionality)
 
   const handleOnSubmit = async (value: z.infer<typeof loginFormSchema>) => {
     const signinData = await signIn("credentials", {
@@ -59,6 +72,7 @@ const Login = () => {
       password: value.password,
       redirect: false,
     });
+<<<<<<< HEAD
 
     if (signinData?.status === 401) {
       toast.error("Invalid Email or Password");
@@ -73,6 +87,26 @@ const Login = () => {
       dispatch(updateUser({ user: session?.data?.user }));
     }
   }, [dispatch, session?.data?.user, session?.status]);
+=======
+    if (signinData?.error) {
+      toast.error(signinData.error);
+    } else {
+      router.push("/");
+    }
+  };
+
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     toast.success("Login successfull");
+  //     router.replace("/");
+  //   } else if (error) {
+  //     const errorData = error as any;
+  //     toast.error(errorData.data?.message);
+  //   } else if (user?.fullName) {
+  //     router.replace("/");
+  //   }
+  // }, [error, isSuccess, router, user?.fullName]);
+>>>>>>> 298d295 ([change] auth functionality)
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
@@ -120,13 +154,9 @@ const Login = () => {
                 <Link href={"/forgotPassword"}>Forgot Password?</Link>
               </div>
 
-              {isLoading ? (
-                <LoadingButton className="w-full" />
-              ) : (
-                <Button className="w-full" type="submit">
-                  Sign In
-                </Button>
-              )}
+              <Button className="w-full" type="submit">
+                Sign In
+              </Button>
             </form>
           </Form>
         </CardContent>
