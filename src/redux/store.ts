@@ -24,4 +24,4 @@ const initiallize = () => {
   );
 };
 
-initiallize();
+// initiallize();
