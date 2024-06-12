@@ -46,7 +46,6 @@ export default function RootLayout({
           hind_siliguri.variable
         )}
       >
-<<<<<<< HEAD
         <QueryProvider>
           <NextAuthProvider>
             <ReduxProvider>
@@ -55,14 +54,6 @@ export default function RootLayout({
             </ReduxProvider>
           </NextAuthProvider>
         </QueryProvider>
-=======
-        <NextAuthProvider>
-          <ReduxProvider>
-            {children}
-            <Toaster position="top-center" reverseOrder={false} />
-          </ReduxProvider>
-        </NextAuthProvider>
->>>>>>> 298d295 ([change] auth functionality)
       </body>
     </html>
   );
