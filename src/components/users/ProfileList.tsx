@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { IuserList } from "@/types/user";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
+import Logout from "./Logout";
 import ProfilePicture from "./ProfilePicture";
 
 const profileListLink = [
@@ -24,22 +25,9 @@ const profileListLink = [
     name: "সকল কোর্স",
     path: "/courses",
   },
-  {
-    name: "লগ আউট",
-    path: "/",
-  },
 ];
 
 const ProfileList = async ({ className }: IuserList) => {
-  // const handleLogout = (item: { name: string; path: string }) => {
-  //   if (item.path === "/") {
-  //     toast.success("Logout successfull");
-  //     setIsLogout(true);
-  //     router.replace("/");
-  //     window.location.reload();
-  //   }
-  // };
-
   const session = await getServerSession(authOptions);
 
   return (
@@ -57,15 +45,13 @@ const ProfileList = async ({ className }: IuserList) => {
       <div className="">
         {profileListLink.map((item, i) => (
           <div className="mb-4" key={i}>
-            <Link
-              // onClick={() => handleLogout(item)}
-              className="font-noto text-lg"
-              href={item.path}
-            >
+            <Link className="font-noto text-lg" href={item.path}>
               {item.name}
             </Link>
           </div>
         ))}
+
+        <Logout />
       </div>
     </div>
   );
