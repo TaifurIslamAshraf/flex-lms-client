@@ -23,19 +23,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-<<<<<<< HEAD
 
 import { updateUser } from "@/redux/features/auth/authSlice";
 import { signIn, useSession } from "next-auth/react";
-=======
-import { signIn } from "next-auth/react";
->>>>>>> dae1680 ([change] auth functionality)
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
-<<<<<<< HEAD
 import { useDispatch } from "react-redux";
-=======
->>>>>>> dae1680 ([change] auth functionality)
 
 const loginFormSchema = z.object({
   email: z.string().min(1, "Email is required").email("Invalid email address"),
@@ -47,13 +41,9 @@ const loginFormSchema = z.object({
 
 const Login = () => {
   const router = useRouter();
-<<<<<<< HEAD
 
   const dispatch = useDispatch();
   const session = useSession();
-=======
-  // const { user } = useSelector((state: any) => state.auth);
->>>>>>> dae1680 ([change] auth functionality)
 
   const form = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
