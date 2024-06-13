@@ -1,9 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { customRevalidateTag } from "@/lib/_actions/revalidateTag";
 import { updateUser } from "@/redux/features/auth/authSlice";
 import { useAddCartMutation } from "@/redux/features/cart/cartApi";
 import { ShoppingBag } from "lucide-react";
+import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
@@ -14,10 +16,14 @@ interface Props {
 
 const AddToCart = ({ courseId }: Props) => {
   const dispatch = useDispatch();
-  const [addCart, { isLoading, isSuccess, error, data }] = useAddCartMutation();
+  const session = useSession();
+  const [addCart, { isLoading, isSuccess, error, data }] = useAddCartMutation(
+    {}
+  );
 
   const handleAddToCart = async () => {
-    await addCart({ courseId });
+    await addCart({ courseId, accessToken: session?.data?.accessToken });
+    await customRevalidateTag("Cart");
   };
 
   useEffect(() => {

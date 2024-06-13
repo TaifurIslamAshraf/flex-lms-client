@@ -3,8 +3,8 @@ import { assests } from "@/lib/assests";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
-import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
+import CartIcon from "../CartIcon";
 import Categorize from "../Categorize";
 import Search from "../Search";
 import Profile from "../users/Profile";
@@ -33,14 +33,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className="flex items-center gap-10">
-            <div className="">
-              <Link href={"/cart"} className="relative">
-                <ShoppingCart size={30} className="hover:text-primary " />
-                <div className="w-[18px] h-[18px] rounded-full bg-primary flex items-center flex-col justify-center text-secondary font-bold text-sm absolute -top-1 -right-1">
-                  {0}
-                </div>
-              </Link>
-            </div>
+            <CartIcon />
             <Profile />
           </div>
         </div>

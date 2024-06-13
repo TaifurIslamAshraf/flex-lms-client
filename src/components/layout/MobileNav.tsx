@@ -21,7 +21,7 @@ const MobileNav = () => {
         <Image src={assests.Logo} alt="Logo" height={35} width={170} />
         <Sheet>
           <SheetTrigger>
-            <Menu />
+            <Menu fillRule="evenodd" clipRule="evenodd" />
           </SheetTrigger>
           <SheetContent className="pt-6">
             <ProfileList className="" />

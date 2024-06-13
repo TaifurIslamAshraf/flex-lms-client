@@ -1,35 +1,8 @@
 import { apiSlice } from "../apiSlice/apiSlice";
-import { loadUser, userLogin, userLogout } from "./authSlice";
+import { loadUser, userLogout } from "./authSlice";
 
 export const authApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
-    login: build.mutation({
-      query: ({ email, password }) => ({
-        url: "/auth/login",
-        method: "POST",
-        body: {
-          email,
-          password,
-        },
-        credentials: "include" as const,
-      }),
-
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-        try {
-          const result = await queryFulfilled;
-          console.log(result);
-          dispatch(
-            userLogin({
-              accessToken: result.data.accessToken,
-              user: result.data.user,
-            })
-          );
-        } catch (error) {
-          console.log(error);
-        }
-      },
-    }),
-
     register: build.mutation({
       query: (data) => ({
         url: "/auth/register",
@@ -95,23 +68,25 @@ export const authApi = apiSlice.injectEndpoints({
     }),
 
     getMe: build.query({
-      query: ({}) => ({
+      query: ({ accessToken }) => ({
         url: "/users/me",
         method: "GET",
         credentials: "include",
+        headers: {
+          authorization: `Bearer ${accessToken}`,
+        },
       }),
       invalidatesTags: ["Users"] as any,
 
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         const result = await queryFulfilled;
-        dispatch(loadUser(result?.data?.user));
+        dispatch(loadUser(result?.data?.data));
       },
     }),
   }),
 });
 
 export const {
-  useLoginMutation,
   useRegisterMutation,
   useLogoutQuery,
   useForgotPasswordMutation,

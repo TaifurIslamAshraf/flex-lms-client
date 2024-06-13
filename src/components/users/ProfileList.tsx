@@ -1,8 +1,9 @@
+"use client";
+
 import { Separator } from "@/components/ui/separator";
-import { authOptions } from "@/lib/auth";
 import { cn } from "@/lib/utils";
 import { IuserList } from "@/types/user";
-import { getServerSession } from "next-auth";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 import Logout from "./Logout";
@@ -29,17 +30,23 @@ const profileListLink = [
   },
 ];
 
-const ProfileList = async ({ className }: IuserList) => {
-  const session = await getServerSession(authOptions);
+const ProfileList = ({ className }: IuserList) => {
+  const session = useSession();
 
   return (
     <div className={cn(className)}>
       <div className="md:flex block gap-6 items-center">
-        <ProfilePicture avatar={session?.user?.avatar} height={50} width={50} />
+        <ProfilePicture
+          avatar={session?.data?.user?.avatar}
+          height={50}
+          width={50}
+        />
         <div className="">
-          <h1 className="font-bold text-xl uppercase">{session?.user?.name}</h1>
+          <h1 className="font-bold text-xl uppercase">
+            {session?.data?.user?.name}
+          </h1>
           <p className="text-muted-foreground">
-            Mobile: {session?.user?.phone}
+            Mobile: {session?.data?.user?.phone}
           </p>
         </div>
       </div>
