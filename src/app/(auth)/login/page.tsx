@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { LoadingButton } from "@/components/LoaderButton";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -123,9 +124,13 @@ const Login = () => {
                 <Link href={"/forgotPassword"}>Forgot Password?</Link>
               </div>
 
-              <Button className="w-full" type="submit">
-                Sign In
-              </Button>
+              {isLoading ? (
+                <LoadingButton className="w-full" />
+              ) : (
+                <Button className="w-full" type="submit">
+                  Sign In
+                </Button>
+              )}
             </form>
           </Form>
         </CardContent>
