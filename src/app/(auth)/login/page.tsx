@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { LoadingButton } from "@/components/LoaderButton";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -28,7 +27,7 @@ import { Input } from "@/components/ui/input";
 import { updateUser } from "@/redux/features/auth/authSlice";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 
@@ -45,10 +44,6 @@ const Login = () => {
 
   const dispatch = useDispatch();
   const session = useSession();
-
-  const dispatch = useDispatch();
-  const session = useSession();
-  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
@@ -125,13 +120,9 @@ const Login = () => {
                 <Link href={"/forgotPassword"}>Forgot Password?</Link>
               </div>
 
-              {isLoading ? (
-                <LoadingButton className="w-full" />
-              ) : (
-                <Button className="w-full" type="submit">
-                  Sign In
-                </Button>
-              )}
+              <Button className="w-full" type="submit">
+                Sign In
+              </Button>
             </form>
           </Form>
         </CardContent>
