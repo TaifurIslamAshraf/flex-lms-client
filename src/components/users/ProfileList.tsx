@@ -32,7 +32,6 @@ const profileListLink = [
 
 const ProfileList = ({ className }: IuserList) => {
   const { user } = useSelector((state: any) => state?.auth);
-const ProfileList = async ({ className }: IuserList) => {
 
   return (
     <div className={cn(className)}>
