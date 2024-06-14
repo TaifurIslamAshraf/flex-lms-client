@@ -20,6 +20,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useUpdateUserPasswordMutation } from "@/redux/features/users/usersApi";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -37,6 +38,8 @@ const changePasswordSchema = z.object({
 });
 
 const ChangePassword = () => {
+  const session = useSession();
+
   const [updateUserPassword, { isSuccess, error, isLoading }] =
     useUpdateUserPasswordMutation();
 
@@ -52,6 +55,7 @@ const ChangePassword = () => {
     updateUserPassword({
       oldPassword: data.oldPassword,
       newPassword: data.newPassword,
+      accessToken: session?.data?.accessToken,
     });
   };
 

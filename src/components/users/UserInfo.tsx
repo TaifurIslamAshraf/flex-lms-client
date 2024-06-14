@@ -23,12 +23,14 @@ import {
   useUpdateUserInfoMutation,
 } from "@/redux/features/users/usersApi";
 import { Camera, Loader2 } from "lucide-react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 
 const UserInfo = () => {
+  const session = useSession();
   const { user } = useSelector((state: any) => state.auth);
   const [name, setName] = useState<string>();
   const [phone, setPhone] = useState<string>();
@@ -57,7 +59,10 @@ const UserInfo = () => {
     const formData = new FormData();
     formData.append("avatar", avatar);
 
-    updateProfile(formData);
+    updateProfile({
+      avatar: formData,
+      accessToken: session?.data?.accessToken,
+    });
   };
 
   const handleName = async () => {
@@ -72,7 +77,10 @@ const UserInfo = () => {
       instructor,
     };
 
-    await updateUserInfo(updatedPayload);
+    await updateUserInfo({
+      updatedPayload,
+      accessToken: session?.data?.accessToken,
+    });
     await customRevalidateTag("Single_Course");
   };
 

@@ -3,11 +3,11 @@
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { IuserList } from "@/types/user";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 import Logout from "./Logout";
 
+import { useSelector } from "react-redux";
 import ProfilePicture from "./ProfilePicture";
 
 const profileListLink = [
@@ -31,23 +31,15 @@ const profileListLink = [
 ];
 
 const ProfileList = ({ className }: IuserList) => {
-  const session = useSession();
+  const { user } = useSelector((state: any) => state?.auth);
 
   return (
     <div className={cn(className)}>
       <div className="md:flex block gap-6 items-center">
-        <ProfilePicture
-          avatar={session?.data?.user?.avatar}
-          height={50}
-          width={50}
-        />
+        <ProfilePicture avatar={user?.avatar} height={50} width={50} />
         <div className="">
-          <h1 className="font-bold text-xl uppercase">
-            {session?.data?.user?.name}
-          </h1>
-          <p className="text-muted-foreground">
-            Mobile: {session?.data?.user?.phone}
-          </p>
+          <h1 className="font-bold text-xl uppercase">{user?.name}</h1>
+          <p className="text-muted-foreground">Mobile: {user?.phone}</p>
         </div>
       </div>
       <Separator className="my-6" />

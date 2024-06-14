@@ -4,10 +4,13 @@ import { updateUser } from "../auth/authSlice";
 export const userApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     updateProfile: builder.mutation({
-      query: (formData) => ({
+      query: ({ avatar, accessToken }) => ({
         url: "/users/update-avatar",
         method: "PUT",
-        body: formData,
+        body: avatar,
+        headers: {
+          authorization: `Bearer ${accessToken}`,
+        },
         credentials: "include" as const,
       }),
 
@@ -25,11 +28,13 @@ export const userApi = apiSlice.injectEndpoints({
       },
     }),
     updateUserInfo: builder.mutation({
-      query: (data) => ({
+      query: ({ updatedPayload, accessToken }) => ({
         url: "/users/update-info",
         method: "PUT",
-        body: data,
-
+        body: updatedPayload,
+        headers: {
+          authorization: `Bearer ${accessToken}`,
+        },
         credentials: "include",
       }),
 
@@ -47,24 +52,18 @@ export const userApi = apiSlice.injectEndpoints({
       },
     }),
     updateUserPassword: builder.mutation({
-      query: ({ oldPassword, newPassword }) => ({
+      query: ({ oldPassword, newPassword, accessToken }) => ({
         url: "/auth/update-password",
         method: "PUT",
         body: {
           oldPassword,
           newPassword,
         },
-
+        headers: {
+          authorization: `Bearer ${accessToken}`,
+        },
         credentials: "include",
       }),
-
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-        try {
-          const result = await queryFulfilled;
-        } catch (error) {
-          console.log(error);
-        }
-      },
     }),
   }),
 });
