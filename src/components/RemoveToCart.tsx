@@ -1,7 +1,10 @@
 "use client";
 
 import { customRevalidateTag } from "@/lib/_actions/revalidateTag";
-import { useRemoveCartMutation } from "@/redux/features/cart/cartApi";
+import {
+  useGetAllCartItemsQuery,
+  useRemoveCartMutation,
+} from "@/redux/features/cart/cartApi";
 import { Trash2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
@@ -14,10 +17,14 @@ type Props = {
 const RemoveToCart = ({ courseId }: Props) => {
   const session = useSession();
   const [removeCart, { isLoading, isSuccess }] = useRemoveCartMutation();
+  const { refetch } = useGetAllCartItemsQuery({
+    accessToken: session?.data?.accessToken,
+  });
 
   const handleCartItemRemove = async () => {
     await removeCart({ courseId, accessToken: session?.data?.accessToken });
     await customRevalidateTag("Cart");
+    await refetch();
   };
 
   useEffect(() => {

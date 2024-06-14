@@ -17,6 +17,18 @@ export const cartApi = apiSlice.injectEndpoints({
       }),
     }),
 
+    getAllCartItems: build.query({
+      query: ({ accessToken }) => ({
+        url: "/cart/cart-items",
+        method: "GET",
+
+        headers: {
+          authorization: `Bearer ${accessToken}`,
+        },
+        credentials: "include" as const,
+      }),
+    }),
+
     removeCart: build.mutation({
       query: ({ courseId, accessToken }) => ({
         url: "/cart/remove-to-cart",
@@ -38,4 +50,8 @@ export const cartApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useAddCartMutation, useRemoveCartMutation } = cartApi;
+export const {
+  useAddCartMutation,
+  useRemoveCartMutation,
+  useGetAllCartItemsQuery,
+} = cartApi;

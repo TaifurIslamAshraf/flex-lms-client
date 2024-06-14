@@ -3,7 +3,10 @@
 import { Button } from "@/components/ui/button";
 import { customRevalidateTag } from "@/lib/_actions/revalidateTag";
 import { updateUser } from "@/redux/features/auth/authSlice";
-import { useAddCartMutation } from "@/redux/features/cart/cartApi";
+import {
+  useAddCartMutation,
+  useGetAllCartItemsQuery,
+} from "@/redux/features/cart/cartApi";
 import { ShoppingBag } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
@@ -22,10 +25,14 @@ const AddToCart = ({ courseId, cartText = "কার্ট", parantClass }: Prop
   const [addCart, { isLoading, isSuccess, error, data }] = useAddCartMutation(
     {}
   );
+  const { refetch } = useGetAllCartItemsQuery({
+    accessToken: session?.data?.accessToken,
+  });
 
   const handleAddToCart = async () => {
     await addCart({ courseId, accessToken: session?.data?.accessToken });
     await customRevalidateTag("Cart");
+    await refetch();
   };
 
   useEffect(() => {
