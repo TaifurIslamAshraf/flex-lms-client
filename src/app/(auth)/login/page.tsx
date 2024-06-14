@@ -44,8 +44,6 @@ const Login = () => {
 
   const dispatch = useDispatch();
   const session = useSession();
-  const dispatch = useDispatch();
-  const session = useSession();
 
   const form = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
