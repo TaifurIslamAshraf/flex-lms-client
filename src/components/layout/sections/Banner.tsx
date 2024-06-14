@@ -25,7 +25,10 @@ const Banner = () => {
           বসেই নিজের স্কিল ডেভেলপ করুন- সেরা এক্সপার্টদের কাছ থেকে!
         </p>
 
-        <Button className="text-lg font-[500] font-siliguri block mx-auto lg:mx-0 lg:grid lg:place-content-center">
+        <Button
+          size={"lg"}
+          className="text-xl font-semibold font-noto block mx-auto lg:mx-0 lg:grid lg:place-content-center"
+        >
           <Link href={"/courses"}>সকল কোর্স</Link>
         </Button>
       </div>

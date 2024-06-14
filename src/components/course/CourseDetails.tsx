@@ -1,13 +1,14 @@
-import { ShoppingBag } from "lucide-react";
+import AddToCart from "../AddToCart";
 import { Button } from "../ui/button";
 
 type Props = {
   details: { title: string; _id: string }[];
   level: string;
   price: number;
+  courseId: string;
 };
 
-const CourseDetails = ({ details, level, price }: Props) => {
+const CourseDetails = ({ details, level, price, courseId }: Props) => {
   return (
     <div className="xl:max-w-[330px] max-w-full w-full min-w-[320px] shadow-lg p-2 rounded-3xl">
       <div className="bg-muted p-4 rounded-3xl space-y-6">
@@ -35,14 +36,11 @@ const CourseDetails = ({ details, level, price }: Props) => {
             কোর্সটি কিনুন
           </Button>
 
-          <Button
-            className="text-primary font-semibold font-noto w-full flex items-center gap-2"
-            variant={"outline"}
-            size={"icon"}
-          >
-            <ShoppingBag size={20} />
-            কার্টে যুক্ত করুন
-          </Button>
+          <AddToCart
+            parantClass="text-primary font-semibold font-noto w-full flex items-center gap-2"
+            courseId={courseId}
+            cartText="কার্টে যুক্ত করুন"
+          />
         </div>
       </div>
     </div>

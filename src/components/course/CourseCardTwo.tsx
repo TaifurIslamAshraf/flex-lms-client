@@ -41,7 +41,10 @@ const CourseCardTwo = ({ course }: Props) => {
         </div>
 
         <div className="flex items-center justify-end gap-3">
-          <AddToCart courseId={course?._id} />
+          <AddToCart
+            courseId={course?._id}
+            parantClass="flex items-center gap-1 font-siliguri"
+          />
           <Link href={`/purchase/${course?.slug}`}>
             <Button className="font-siliguri font-semibold">
               কোর্সটি কিনুন

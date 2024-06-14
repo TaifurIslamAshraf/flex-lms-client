@@ -6,6 +6,7 @@ import { assests } from "@/lib/assests";
 import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import ProfileList from "../users/ProfileList";
 
 const MobileNav = () => {
@@ -18,7 +19,9 @@ const MobileNav = () => {
           "flex items-center justify-between bg-white shadow-md fixed w-full left-0 right-0 h-[80px] z-40"
         )}
       >
-        <Image src={assests.Logo} alt="Logo" height={35} width={170} />
+        <Link href={"/"}>
+          <Image src={assests.Logo} alt="Logo" height={35} width={170} />
+        </Link>
         <Sheet>
           <SheetTrigger>
             <Menu fillRule="evenodd" clipRule="evenodd" />

@@ -65,6 +65,7 @@ const SingleCourse = async ({ params }: Props) => {
               price={course?.price}
               details={course?.details}
               level={course?.level}
+              courseId={course?._id}
             />
           </div>
         </div>

@@ -12,9 +12,11 @@ import { useDispatch } from "react-redux";
 
 interface Props {
   courseId: string;
+  cartText?: string;
+  parantClass?: string;
 }
 
-const AddToCart = ({ courseId }: Props) => {
+const AddToCart = ({ courseId, cartText = "কার্ট", parantClass }: Props) => {
   const dispatch = useDispatch();
   const session = useSession();
   const [addCart, { isLoading, isSuccess, error, data }] = useAddCartMutation(
@@ -39,11 +41,11 @@ const AddToCart = ({ courseId }: Props) => {
   return (
     <Button
       variant={"outline"}
-      className="flex items-center gap-1 font-siliguri"
+      className={parantClass}
       onClick={handleAddToCart}
     >
       <ShoppingBag size={20} className="text-primary font-semibold" />{" "}
-      <span>কার্ট</span>
+      <span>{cartText}</span>
     </Button>
   );
 };
