@@ -10,7 +10,7 @@ const Profile = () => {
 
   return (
     <div className="">
-      {user ? (
+      {user?.name ? (
         <div className="relative group">
           <div className="cursor-pointer rounded-full m-auto w-[40px] h-[40px]  ">
             <ProfilePicture avatar={user?.avatar} />
