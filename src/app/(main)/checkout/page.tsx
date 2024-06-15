@@ -28,7 +28,11 @@ const Checkout = () => {
 
   const [createOrder, { isLoading, error, isError, isSuccess }] =
     useCreateOrderMutation();
-  const { data, isLoading: isCartItemLoading } = useGetAllCartItemsQuery({
+  const {
+    data,
+    isLoading: isCartItemLoading,
+    refetch,
+  } = useGetAllCartItemsQuery({
     accessToken: session?.data?.accessToken,
   });
 
@@ -60,6 +64,10 @@ const Checkout = () => {
       toast.error(errroData?.data?.message);
     }
   }, [dispatch, error, isError, isSuccess, router]);
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   return (
     <div className={cn(styles.paddingX, styles.layout, "w-full pt-[120px]")}>
