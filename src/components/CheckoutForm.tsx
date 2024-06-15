@@ -21,9 +21,10 @@ import { Button } from "./ui/button";
 
 type Props = {
   handleSubmit: (value: z.infer<typeof checkoutSchema>) => void;
+  isCartEmpty?: number;
 };
 
-const CheckoutForm = ({ handleSubmit }: Props) => {
+const CheckoutForm = ({ handleSubmit, isCartEmpty }: Props) => {
   const session = useSession();
   const form = useForm<z.infer<typeof checkoutSchema>>({
     resolver: zodResolver(checkoutSchema),
@@ -115,7 +116,11 @@ const CheckoutForm = ({ handleSubmit }: Props) => {
             />
           </div>
 
-          <Button className="w-full my-6" type="submit">
+          <Button
+            disabled={isCartEmpty === 0}
+            className="w-full my-6"
+            type="submit"
+          >
             Order Now
           </Button>
         </div>

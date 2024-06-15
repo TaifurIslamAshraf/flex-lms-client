@@ -1,5 +1,5 @@
 import { apiSlice } from "../apiSlice/apiSlice";
-import { loadUser } from "../auth/authSlice";
+import { updateCartItems } from "./cartSlice";
 
 export const cartApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
@@ -15,6 +15,14 @@ export const cartApi = apiSlice.injectEndpoints({
         },
         credentials: "include" as const,
       }),
+
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        const result = await queryFulfilled;
+        console.log();
+        dispatch(
+          updateCartItems({ cartItems: result?.data?.data?.cartItems?.length })
+        );
+      },
     }),
 
     getAllCartItems: build.query({
@@ -27,6 +35,12 @@ export const cartApi = apiSlice.injectEndpoints({
         },
         credentials: "include" as const,
       }),
+
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        const result = await queryFulfilled;
+
+        dispatch(updateCartItems({ cartItems: result?.data?.data?.length }));
+      },
     }),
 
     removeCart: build.mutation({
@@ -44,7 +58,9 @@ export const cartApi = apiSlice.injectEndpoints({
 
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         const result = await queryFulfilled;
-        dispatch(loadUser(result?.data?.data));
+        dispatch(
+          updateCartItems({ cartItems: result?.data?.data?.cartItems?.length })
+        );
       },
     }),
   }),

@@ -9,36 +9,47 @@ import { cn } from "@/lib/utils";
 
 import CheckoutForm from "@/components/CheckoutForm";
 import OrderItems from "@/components/OrderItems";
-import { customRevalidateTag } from "@/lib/_actions/revalidateTag";
 import { checkoutSchema } from "@/lib/formShemas/checkout.schema";
-import { useGetAllCartItemsQuery } from "@/redux/features/cart/cartApi";
 import { updateCartItems } from "@/redux/features/cart/cartSlice";
 import { useCreateOrderMutation } from "@/redux/features/checkout/checkoutApi";
-import { ICartItem } from "@/types/cart";
+import { useSingleCourseQuery } from "@/redux/features/courses/courseApi";
+import { ISingleCourse } from "@/types/courses";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 
-const Checkout = () => {
+type Props = {
+  params: { slug: string };
+};
+
+const Purchase = ({ params }: Props) => {
   const router = useRouter();
   const session = useSession();
   const dispatch = useDispatch();
 
   const [createOrder, { isLoading, error, isError, isSuccess }] =
     useCreateOrderMutation();
-  const { data, isLoading: isCartItemLoading } = useGetAllCartItemsQuery({
-    accessToken: session?.data?.accessToken,
+  const { data, isLoading: isCartItemLoading } = useSingleCourseQuery({
+    slug: params.slug,
   });
 
-  const cartItems = data?.data as ICartItem[];
+  const course = data?.data as ISingleCourse;
 
-  const orderPayload =
-    cartItems &&
-    cartItems?.map((item) => {
-      return { course: item?._id, price: item?.price };
-    });
+  const cartItems = [
+    {
+      _id: course?._id,
+      name: course?.name,
+      slug: course?.slug,
+      thumbnail: course?.thumbnail,
+      price: course?.price,
+    },
+  ];
+
+  console.log(cartItems);
+
+  const orderPayload = [{ course: course?._id, price: course?.price }];
   const handleSubmit = async (value: z.infer<typeof checkoutSchema>) => {
     const payload = {
       items: orderPayload,
@@ -46,7 +57,7 @@ const Checkout = () => {
     };
 
     await createOrder({ payload, accessToken: session?.data?.accessToken });
-    await customRevalidateTag("Cart");
+
     router.refresh();
   };
 
@@ -73,7 +84,7 @@ const Checkout = () => {
           </div>
           <div className="flex-1">
             <CheckoutForm
-              isCartEmpty={cartItems?.length}
+              isCartEmpty={cartItems && 1}
               handleSubmit={handleSubmit}
             />
           </div>
@@ -83,4 +94,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default Purchase;

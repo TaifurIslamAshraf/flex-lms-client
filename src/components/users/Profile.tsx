@@ -1,11 +1,16 @@
 "use client";
 
+import { useGetMeQuery } from "@/redux/features/auth/authApi";
+import { useSession } from "next-auth/react";
 import { useSelector } from "react-redux";
 import LoginRegisterBtn from "./LoginRegisterBtn";
 import ProfileList from "./ProfileList";
 import ProfilePicture from "./ProfilePicture";
 
 const Profile = () => {
+  const session = useSession();
+
+  const {} = useGetMeQuery({ accessToken: session?.data?.accessToken });
   const { user } = useSelector((state: any) => state.auth);
 
   return (
