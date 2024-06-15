@@ -95,3 +95,14 @@ export interface IPagination {
   nextPage: number | null;
   prevPage: number | null;
 }
+
+export interface IUserCourses {
+  _id: string;
+  completed: boolean;
+  progress: number;
+  title: string;
+  thumbnail: string;
+  slug: string;
+  videoDataLength: number;
+  completedVideoLength: number;
+}

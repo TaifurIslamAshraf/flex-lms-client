@@ -7,7 +7,6 @@ import {
 import { Toaster } from "react-hot-toast";
 
 import NextAuthProvider from "@/lib/Provider";
-import QueryProvider from "@/lib/QueryClientProvider";
 import ReduxProvider from "@/lib/reduxProvider";
 import { cn } from "@/lib/utils";
 import "./globals.css";
@@ -46,14 +45,12 @@ export default function RootLayout({
           hind_siliguri.variable
         )}
       >
-        <QueryProvider>
-          <NextAuthProvider>
-            <ReduxProvider>
-              {children}
-              <Toaster position="top-center" reverseOrder={false} />
-            </ReduxProvider>
-          </NextAuthProvider>
-        </QueryProvider>
+        <NextAuthProvider>
+          <ReduxProvider>
+            {children}
+            <Toaster position="top-center" reverseOrder={false} />
+          </ReduxProvider>
+        </NextAuthProvider>
       </body>
     </html>
   );
