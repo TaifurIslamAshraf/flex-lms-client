@@ -1,5 +1,6 @@
 import { styles } from "@/app/styles";
 import InteractionCard from "@/components/dashboard/InteractionCard";
+import UserCourseCard from "@/components/dashboard/UserCourseCard";
 import { Separator } from "@/components/ui/separator";
 import { getAllUserCourses } from "@/lib/_actions/userCourse.action";
 import { cn } from "@/lib/utils";
@@ -11,7 +12,7 @@ const page = async () => {
 
   const isCompletedCourse = userCourses?.reduce((acc, cur) => {
     if (cur.completed) {
-      acc = +1;
+      acc = acc += 1;
     }
 
     return acc;
@@ -30,7 +31,7 @@ const page = async () => {
       <Separator />
 
       <div className={cn(styles.paddingX, styles?.paddingY, styles.layout)}>
-        <div className="flex items-center gap-10">
+        <div className="flex items-center justify-center sm:justify-start sm:flex-nowrap flex-wrap gap-10">
           <InteractionCard
             title="এনরোলকৃত মোট কোর্সের সংখ্যা"
             info={userCourses?.length}
@@ -40,6 +41,18 @@ const page = async () => {
             title="সম্পন্নকৃত মোট কোর্সের সংখ্যা"
             info={isCompletedCourse}
           />
+        </div>
+
+        <div className="space-y-6 py-4">
+          <h1 className="lg:text-3xl md:text-2xl text-xl mt-12 font-extrabold font-siliguri">
+            আপনি যে কোর্সগুলো এনরোল করছেন
+          </h1>
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10">
+            {userCourses &&
+              userCourses?.map((items) => (
+                <UserCourseCard key={items?._id} courseData={items} />
+              ))}
+          </div>
         </div>
       </div>
     </div>

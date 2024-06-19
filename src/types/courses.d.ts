@@ -16,17 +16,42 @@ export interface ICourse {
   __v: number;
 }
 
+// Benefit interface
 interface Benefit {
   title: string;
   _id: string;
 }
 
+// Prerequisite interface
 interface Prerequisite {
   title: string;
   _id: string;
 }
 
-interface ICourseData {
+// IReview interface
+export interface IReview {
+  user: string;
+  rating: number;
+  comment?: string;
+  commentReplies: any[];
+}
+
+// IVideoResource interface
+export interface IVideoResource {
+  title: string;
+  url: string;
+  _id?: string;
+}
+
+// IComment interface
+export interface IComment {
+  user: string;
+  qustion: string;
+  qustionReplies: any[];
+}
+
+// ICourseData interface
+export interface ICourseData {
   videoTitle: string;
   videoDescription: string;
   videoUrl: string;
@@ -35,8 +60,8 @@ interface ICourseData {
   videoPlayer: string;
   contentDrip: boolean;
   _id: string;
-  videoResource: any[];
-  questions: any[];
+  videoResource: IVideoResource[];
+  qustions: IComment[];
 }
 
 export interface ISingleCourse extends ICourse {
@@ -99,10 +124,49 @@ export interface IPagination {
 export interface IUserCourses {
   _id: string;
   completed: boolean;
+  courseId: string;
   progress: number;
   title: string;
   thumbnail: string;
   slug: string;
   videoDataLength: number;
   completedVideoLength: number;
+}
+
+export interface IUserSingleCourse {
+  user: string;
+  enrolledAt?: Date;
+  completed: boolean;
+  progress: number;
+  videosCompleted: string[];
+  currentVideo?: string;
+  nextVideo?: string;
+  prevVideo?: string;
+  course: {
+    _id: string;
+    instructor: string | any;
+    name: string;
+    slug: string;
+    description: string;
+    subcategory: string;
+    category: string;
+    price: number;
+    estimatedPrice?: number;
+    thumbnail: string;
+    tags: string;
+    level: "beginner" | "intermediate" | "expert";
+    demoUrl: string;
+    details: { title: string; _id: string }[];
+    benefits: Benefit[];
+    prerequistites: Prerequisite[];
+    courseDuration: string;
+    materialIncludes: string[];
+    reviews: IReview[];
+    courseData: ICourseData[];
+    rating: number;
+    purchased: number;
+    createdAt?: string;
+    updatedAt?: string;
+    __v: number;
+  };
 }

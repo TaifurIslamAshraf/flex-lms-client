@@ -66,6 +66,7 @@ const SingleCourse = async ({ params }: Props) => {
               details={course?.details}
               level={course?.level}
               courseId={course?._id}
+              slug={course?.slug}
             />
           </div>
         </div>

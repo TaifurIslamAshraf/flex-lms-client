@@ -1,3 +1,4 @@
+import Link from "next/link";
 import AddToCart from "../AddToCart";
 import { Button } from "../ui/button";
 
@@ -6,9 +7,10 @@ type Props = {
   level: string;
   price: number;
   courseId: string;
+  slug: string;
 };
 
-const CourseDetails = ({ details, level, price, courseId }: Props) => {
+const CourseDetails = ({ details, level, price, courseId, slug }: Props) => {
   return (
     <div className="xl:max-w-[330px] max-w-full w-full min-w-[320px] shadow-lg p-2 rounded-3xl">
       <div className="bg-muted p-4 rounded-3xl space-y-6">
@@ -29,12 +31,14 @@ const CourseDetails = ({ details, level, price, courseId }: Props) => {
 
         <h1 className="text-3xl font-noto font-bold">ফি {price} টাকা</h1>
         <div className="space-y-3">
-          <Button
-            className="bg-primary font-bold font-siliguri text-lg w-full"
-            size={"lg"}
-          >
-            কোর্সটি কিনুন
-          </Button>
+          <Link href={`/purchase/${slug}`}>
+            <Button
+              className="bg-primary font-bold font-siliguri text-lg w-full"
+              size={"lg"}
+            >
+              কোর্সটি কিনুন
+            </Button>
+          </Link>
 
           <AddToCart
             parantClass="text-primary font-semibold font-noto w-full flex items-center gap-2"
