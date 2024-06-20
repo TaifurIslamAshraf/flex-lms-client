@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import { apiSlice } from "./features/apiSlice/apiSlice";
 import authSlice from "./features/auth/authSlice";
 import cartSlice from "./features/cart/cartSlice";
+import userCourseSlice from "./features/usreCourses/userCourseSlice";
 
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
     auth: authSlice,
     cart: cartSlice,
+    userCourse: userCourseSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
@@ -26,3 +28,6 @@ const initiallize = () => {
 };
 
 // initiallize();
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

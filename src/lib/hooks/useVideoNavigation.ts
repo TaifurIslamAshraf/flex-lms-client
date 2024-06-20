@@ -1,9 +1,16 @@
+import { setCourseNavigation } from "@/redux/features/usreCourses/userCourseSlice";
 import { ICourseData, IUserSingleCourse } from "@/types/courses";
 import { useEffect, useState } from "react";
+import { useAppDispatch } from "./useReduxState";
 
-function useVideoNavigation(course: IUserSingleCourse) {
+function useVideoNavigation(
+  course: IUserSingleCourse,
+  clickVideo?: ICourseData
+) {
+  const dispatch = useAppDispatch();
+
   const [currentVideo, setCurrentVideo] = useState<ICourseData | undefined>(
-    undefined
+    clickVideo
   );
   const [nextVideo, setNextVideo] = useState<ICourseData | undefined>(
     undefined
@@ -19,7 +26,9 @@ function useVideoNavigation(course: IUserSingleCourse) {
     const completedVideos = course.videosCompleted;
     let currentVideoIndex = -1;
 
-    if (course.currentVideo) {
+    if (clickVideo) {
+      currentVideoIndex = videoIds.indexOf(clickVideo._id);
+    } else if (course.currentVideo) {
       currentVideoIndex = videoIds.indexOf(course.currentVideo);
     } else if (completedVideos.length > 0) {
       currentVideoIndex = videoIds.indexOf(
@@ -46,7 +55,18 @@ function useVideoNavigation(course: IUserSingleCourse) {
         ? course.course.courseData[currentVideoIndex - 1]
         : undefined
     );
-  }, [course, course.currentVideo, course.videosCompleted]);
+
+    dispatch(setCourseNavigation({ currentVideo, nextVideo, prevVideo }));
+  }, [
+    course,
+    course.currentVideo,
+    course.videosCompleted,
+    currentVideo,
+    dispatch,
+    clickVideo,
+    nextVideo,
+    prevVideo,
+  ]);
 
   return { currentVideo, nextVideo, prevVideo };
 }

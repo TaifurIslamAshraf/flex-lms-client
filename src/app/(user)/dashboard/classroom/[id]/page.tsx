@@ -1,5 +1,7 @@
 import { styles } from "@/app/styles";
+import LessonInfo from "@/components/dashboard/LessonInfo";
 import VideoPlayer from "@/components/dashboard/VideoPlayer";
+import VideoShowcase from "@/components/dashboard/VideoShowcase";
 import { getSingleUserCourses } from "@/lib/_actions/userCourse.action";
 import { cn } from "@/lib/utils";
 import { IUserSingleCourse } from "@/types/courses";
@@ -15,8 +17,18 @@ const page = async ({ params }: Props) => {
     <div
       className={cn("w-full pt-[120px] pb-5", styles.layout, styles.paddingX)}
     >
-      page
-      <VideoPlayer course={course} />
+      <div className="flex gap-8">
+        <div className="flex-1">
+          <VideoPlayer course={course} />
+        </div>
+        <div className="flex-1">
+          <VideoShowcase course={course} />
+        </div>
+      </div>
+
+      <div className="mt-16">
+        <LessonInfo />
+      </div>
     </div>
   );
 };
