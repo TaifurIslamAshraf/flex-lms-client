@@ -23,6 +23,10 @@ const VideoPlayer = ({ course }: Props) => {
   const { currentVideo, nextVideo, prevVideo } = useAppSelector(
     (state) => state.userCourse
   );
+  // const data = useGetVideoUrl(currentVideo?.videoUrl);
+
+  // const myVideoUrl = data?.link ? data?.link : currentVideo?.videoUrl;
+  // console.log(myVideoUrl);
 
   const handleStart = async () => {
     await userCourseSync({
@@ -88,15 +92,17 @@ const VideoPlayer = ({ course }: Props) => {
 
   return (
     <div className="space-y-4">
-      <ReactPlayer
-        onStart={handleStart}
-        onEnded={handleEnd}
-        className="w-full h-full"
-        url={currentVideo?.videoUrl}
-        controls
-        width={700}
-        height={400}
-      />
+      <div className="flex justify-center items-center">
+        <div className="video-player">
+          <ReactPlayer
+            onStart={handleStart}
+            onEnded={handleEnd}
+            url={currentVideo?.videoUrl}
+            controls
+            width="100%"
+          />
+        </div>
+      </div>
 
       <div className="flex items-center justify-between">
         <Button disabled={!prevVideo} onClick={handlePrev} size={"icon"}>

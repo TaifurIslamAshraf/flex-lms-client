@@ -9,7 +9,9 @@ const LessonInfo = () => {
   return (
     <div className="">
       <div className="space-y-2">
-        <h1 className="text-2xl font-semibold font-siliguri">লেসন বিস্তারিত</h1>
+        <h1 className="lg:text-2xl text-lg font-semibold font-siliguri">
+          লেসন বিস্তারিত
+        </h1>
         <p className="text-muted-foreground">
           {currentVideo?.videoDescription}
         </p>
@@ -17,7 +19,7 @@ const LessonInfo = () => {
 
       {currentVideo?.videoResource.length! > 0 && (
         <div className="mt-8">
-          <h1 className="text-2xl font-semibold font-siliguri">
+          <h1 className="lg:text-2xl text-xl font-semibold font-siliguri">
             ভিডিও রিসোর্স
           </h1>
           <div className="mt-2">

@@ -51,7 +51,27 @@ export const userApi = apiSlice.injectEndpoints({
         },
       }),
     }),
+
+    getVideoFromVimeo: builder.query({
+      query: ({
+        videoId,
+        accessToken,
+      }: {
+        videoId?: string;
+        accessToken: string;
+      }) => ({
+        url: `https://api.vimeo.com/videos/${videoId}`,
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }),
+    }),
   }),
 });
 
-export const { useGetSingleUserCourseQuery, useUserCourseSyncMutation } = userApi;
+export const {
+  useGetSingleUserCourseQuery,
+  useUserCourseSyncMutation,
+  useGetVideoFromVimeoQuery,
+} = userApi;

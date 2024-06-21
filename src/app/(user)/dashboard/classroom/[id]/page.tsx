@@ -15,13 +15,17 @@ const page = async ({ params }: Props) => {
   const course = data?.data as IUserSingleCourse;
   return (
     <div
-      className={cn("w-full pt-[120px] pb-5", styles.layout, styles.paddingX)}
+      className={cn(
+        "w-full pt-[120px] pb-5 overflow-x-hidden",
+        styles.layout,
+        styles.paddingX
+      )}
     >
-      <div className="flex gap-8">
-        <div className="flex-1">
+      <div className="xl:flex block xl:gap-8 space-y-8 xl:space-y-0">
+        <div className="flex-shrink-0 flex-grow flex-auto">
           <VideoPlayer course={course} />
         </div>
-        <div className="flex-1">
+        <div className="xl:max-w-[450px] w-full">
           <VideoShowcase course={course} />
         </div>
       </div>

@@ -46,7 +46,9 @@ const VideoShowcase = ({ course }: Props) => {
   return (
     <div className="">
       <div className="space-y-4">
-        <h1 className="text-xl font-medium">{course?.course?.name}</h1>
+        <h1 className="lg:text-xl text-lg font-medium">
+          {course?.course?.name}
+        </h1>
 
         <div className="">
           <h1 className="text-muted-foreground space-x-2">
