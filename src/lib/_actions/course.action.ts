@@ -6,8 +6,7 @@ import { serverApi } from "../utils";
 export const getRandomCourses = async () => {
   try {
     const res = await fetch(`${serverApi}/course/random-courses`, {
-      next: { tags: ["Course"] },
-      cache: "no-store",
+      next: { tags: ["Course"], revalidate: 24 * 60 * 60 },
     });
 
     const course = await res.json();
@@ -20,8 +19,7 @@ export const getRandomCourses = async () => {
 export const getRandomCategoryCourses = async () => {
   try {
     const res = await fetch(`${serverApi}/course/random-category-courses`, {
-      next: { tags: ["Course"] },
-      cache: "no-store",
+      next: { tags: ["Course"], revalidate: 24 * 60 * 60 },
     });
 
     const course = await res.json();
@@ -58,7 +56,7 @@ export const getAllCourses = async ({
     const res = await fetch(
       `${serverApi}/course/all-courses?page=${page}&price=${price}&limit=${limit}&category=${category}&subcategory=${subcategory}&search=${search}&level=${level}`,
       {
-        next: { tags: ["Course"] },
+        next: { tags: ["Course"], revalidate: 10 * 60 },
       }
     );
 

@@ -18,7 +18,7 @@ export const cartApi = apiSlice.injectEndpoints({
 
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         const result = await queryFulfilled;
-        console.log();
+
         dispatch(
           updateCartItems({ cartItems: result?.data?.data?.cartItems?.length })
         );

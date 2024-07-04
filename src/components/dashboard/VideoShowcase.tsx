@@ -60,7 +60,7 @@ const VideoShowcase = ({ course }: Props) => {
           </h1>
           <CourseProgress
             completed={course?.completed}
-            progress={course?.progress}
+            progress={Math.floor(course?.progress)}
           />
         </div>
       </div>

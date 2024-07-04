@@ -35,7 +35,7 @@ const UserCourseCard = ({ courseData }: Props) => {
 
             <CourseProgress
               completed={courseData?.completed}
-              progress={courseData?.progress}
+              progress={Math.floor(courseData?.progress)}
             />
           </div>
         </CardContent>

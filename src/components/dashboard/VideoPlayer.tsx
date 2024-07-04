@@ -44,8 +44,12 @@ const VideoPlayer = ({ course }: Props) => {
     if (nextVideo) {
       setCurrentCourse((prevCourse) => ({
         ...prevCourse,
-        currentVideo: currentVideo?._id,
+        currentVideo: nextVideo?._id,
       }));
+      await userCourseSync({
+        course: currentCourse?.course?._id,
+        currentVideo: nextVideo?._id,
+      });
     } else {
       await userCourseSync({
         course: currentCourse?.course?._id,
@@ -100,6 +104,7 @@ const VideoPlayer = ({ course }: Props) => {
             url={currentVideo?.videoUrl}
             controls
             width="100%"
+            playing={true}
           />
         </div>
       </div>
