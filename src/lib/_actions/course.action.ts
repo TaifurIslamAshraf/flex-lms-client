@@ -56,7 +56,7 @@ export const getAllCourses = async ({
     const res = await fetch(
       `${serverApi}/course/all-courses?page=${page}&price=${price}&limit=${limit}&category=${category}&subcategory=${subcategory}&search=${search}&level=${level}`,
       {
-        next: { tags: ["Course"], revalidate: 10 * 60 },
+        next: { tags: ["Course"] },
       }
     );
 

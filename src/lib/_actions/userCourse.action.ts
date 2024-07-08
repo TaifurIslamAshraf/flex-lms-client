@@ -9,7 +9,7 @@ export const getAllUserCourses = async () => {
 
   try {
     const res = await fetch(`${serverApi}/course-engagement/my-learning`, {
-      next: { tags: ["Course"] },
+      next: { tags: ["Course", "User_Course"] },
       headers: {
         authorization: `Bearer ${session?.accessToken}`,
       },
@@ -30,11 +30,10 @@ export const getSingleUserCourses = async (id: string) => {
     const res = await fetch(
       `${serverApi}/course-engagement/my-learning/${id}`,
       {
-        next: { tags: ["Single_Course"] },
+        next: { tags: ["Single_Course", "Course", "User_Course"] },
         headers: {
           authorization: `Bearer ${session?.accessToken}`,
         },
-        cache: "no-store",
       }
     );
 
@@ -68,12 +67,11 @@ export const userCourseSync = async ({
         completed,
         videosCompleted,
       }),
-      next: { tags: ["Single_Course"] },
+      next: { tags: ["Single_Course", "Course"] },
       headers: {
         "Content-Type": "application/json",
         authorization: `Bearer ${session?.accessToken}`,
       },
-      cache: "no-store",
     });
 
     const data = await res.json();

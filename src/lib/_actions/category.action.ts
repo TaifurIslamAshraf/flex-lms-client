@@ -4,7 +4,7 @@ import { serverApi } from "../utils";
 
 export const getAllCategory = async () => {
   const res = await fetch(`${serverApi}/category/get-all-category`, {
-    next: { tags: ["Category"], revalidate: 10 * 60 },
+    next: { tags: ["Category"] },
   });
 
   const category = await res.json();

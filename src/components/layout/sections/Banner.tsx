@@ -1,12 +1,14 @@
 import { styles } from "@/app/styles";
-import { assests } from "@/lib/assests";
-import { cn } from "@/lib/utils";
+import { getSingleLayout } from "@/lib/_actions/layout.action";
+import { cn, serverUrl } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import TextAnimation from "../../TextAnim/TextAnimation";
 import { Button } from "../../ui/button";
 
-const Banner = () => {
+const Banner = async () => {
+  const { data } = await getSingleLayout("selected");
+
   return (
     <section
       className={cn(
@@ -16,13 +18,12 @@ const Banner = () => {
     >
       <div className="flex-1 space-y-4">
         <TextAnimation
-          text="লক্ষ্য হোক দক্ষ হওয়া!"
+          text={data?.title}
           classes="lg:text-[3rem] lg:text-start lg:mt-0 mt-6 sm:text-[2.5rem] text-center text-[1.8rem] sm:text-center font-siliguri font-extrabold"
         />
 
         <p className="lg:text-lg lg:text-start sm:text-lg text-sm text-center">
-          ‘সব সম্ভব’- এর এই যুগে আপনি কেনো ‘অসম্ভব’ এর নামতা আওড়াচ্ছেন? এখন ঘরে
-          বসেই নিজের স্কিল ডেভেলপ করুন- সেরা এক্সপার্টদের কাছ থেকে!
+          {data?.description}
         </p>
 
         <Button
@@ -35,11 +36,10 @@ const Banner = () => {
       <div className="flex-1">
         <Image
           className="lg:mx-0 block mx-auto"
-          src={assests.Main_banner}
+          src={`${serverUrl}/${data?.image}`}
           alt="main banner"
           height={680}
           width={830}
-          placeholder="blur"
         />
       </div>
     </section>
