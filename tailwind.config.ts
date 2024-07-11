@@ -77,7 +77,7 @@ const config = {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
         noto: ["var(--font-noto)"],
-        siliguri: ["--font-siliguri"],
+        siliguri: ["var(--font-siliguri)"],
       },
     },
   },

@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import AddToCart from "../AddToCart";
 import { Button } from "../ui/button";
@@ -12,8 +14,8 @@ type Props = {
 
 const CourseDetails = ({ details, level, price, courseId, slug }: Props) => {
   return (
-    <div className="xl:max-w-[330px] max-w-full w-full min-w-[320px] shadow-lg p-2 rounded-3xl">
-      <div className="bg-muted p-4 rounded-3xl space-y-6">
+    <div className="xl:max-w-[330px] max-w-full w-full min-w-[340px] shadow-lg p-2 rounded-3xl">
+      <div className="bg-muted p-7 rounded-3xl space-y-6">
         <h1 className="text-lg text-primary">
           <span className="font-medium text-muted-foreground">Level:</span>{" "}
           {level}

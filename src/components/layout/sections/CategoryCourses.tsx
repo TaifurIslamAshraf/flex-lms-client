@@ -22,7 +22,7 @@ const CategoryCourses = async () => {
           <div className="" key={item?._id}>
             {item.courses?.length > 0 && (
               <div className="">
-                <h1 className="text-xl lg:text-2xl font-semibold my-3 uppercase">
+                <h1 className="text-xl text-primary font-siliguri lg:text-2xl font-semibold my-3 uppercase">
                   {item?.name}
                 </h1>
                 <Separator className="mb-4" />

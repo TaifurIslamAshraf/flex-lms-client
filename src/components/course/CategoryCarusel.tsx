@@ -19,18 +19,19 @@ const CategoryCarusel = async ({ searchParams }: Props) => {
   const category = data?.data?.category as ICateogry[];
 
   return (
-    <Carousel className="font-medium text-lg font-noto px-4 py-2 rounded-md border border-primary">
+    <Carousel className="font-medium text-lg font-noto rounded-md">
       <CarouselContent className="">
         {category?.map((items) => (
-          <CarouselItem key={items._id} className="basis-auto">
-            <Link
-              href={`/courses?category=${items?._id}`}
-              className={cn(
-                "text-muted-foreground p-2 bg-muted  hover:text-black transition-all rounded-md",
-                categoryParams === items?._id && "text-primary"
-              )}
-            >
-              {items?.name}
+          <CarouselItem key={items._id} className="basis-auto py-4">
+            <Link href={`/courses?category=${items?._id}`}>
+              <h2
+                className={cn(
+                  "text-muted-foreground px-4 py-3 bg-secondary hover:text-black transition-all rounded-md shadow-md",
+                  categoryParams === items?._id && "text-primary"
+                )}
+              >
+                {items?.name}
+              </h2>
             </Link>
           </CarouselItem>
         ))}

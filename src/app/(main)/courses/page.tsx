@@ -21,16 +21,18 @@ const page = async ({ searchParams }: Props) => {
   return (
     <div className={cn("pt-[120px]", styles.paddingX, styles.layout)}>
       <div className="space-y-4">
-        <h1 className="text-primary text-3xl font-bold font-siliguri">
+        <h1 className="text-primary text-4xl font-bold font-siliguri">
           সকল কোর্স
         </h1>
         <CategoryCarusel searchParams={searchParams} />
       </div>
       <div className="lg:flex block gap-10">
         <CourseMobileFilter />
-        <div className="my-8 p-4 bg-muted max-w-[300px] w-full rounded-lg border border-primary h-fit lg:block hidden">
-          <h1 className="font-siliguri font-semibold text-xl">ফিল্টার</h1>
-          <CourseFilters parantClass="px-2" />
+        <div className="my-10 p-5 bg-muted max-w-[330px] w-full rounded-lg h-fit lg:block hidden">
+          <h1 className="font-siliguri font-semibold text-2xl text-primary">
+            ফিল্টার
+          </h1>
+          <CourseFilters parantClass="px-3" />
         </div>
 
         <div className="my-8 space-y-8">

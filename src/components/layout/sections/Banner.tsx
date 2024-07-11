@@ -16,22 +16,26 @@ const Banner = async () => {
         "lg:px-20 md:px-10 sm:px-5 px-4 lg:flex block items-center justify-center bg-secondary pt-[80px]"
       )}
     >
-      <div className="flex-1 space-y-4">
+      <div className="flex-1 space-y-4 pb-12 lg:pb-0">
         <TextAnimation
           text={data?.title}
-          classes="lg:text-[3rem] lg:text-start lg:mt-0 mt-6 sm:text-[2.5rem] text-center text-[1.8rem] sm:text-center font-siliguri font-extrabold"
+          classes="lg:text-[3.9rem] lg:text-start lg:mt-0 mt-6 md:text-[3rem] text-center sm:text-[2.5rem] text-[1.8rem] sm:text-center font-siliguri font-extrabold"
         />
 
-        <p className="lg:text-lg lg:text-start sm:text-lg text-sm text-center">
+        <p className="lg:text-lg font-noto lg:text-start sm:text-lg text-sm text-center">
           {data?.description}
         </p>
 
-        <Button
-          size={"lg"}
-          className="text-xl font-semibold font-noto block mx-auto lg:mx-0 lg:grid lg:place-content-center"
-        >
-          <Link href={"/courses"}>সকল কোর্স</Link>
-        </Button>
+        <div className="mb-3">
+          <Link href={"/courses"}>
+            <Button
+              size={"lg"}
+              className="text-xl font-semibold block mx-auto lg:mx-0 lg:grid lg:place-content-center font-siliguri"
+            >
+              সকল কোর্স
+            </Button>
+          </Link>
+        </div>
       </div>
       <div className="flex-1">
         <Image

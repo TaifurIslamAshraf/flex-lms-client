@@ -21,7 +21,7 @@ const RandomCourse = async () => {
           প্রফেশনাল <span className="text-primary">দক্ষতা উন্নয়নে</span> এগিয়ে
           যান - এখনই!
         </h1>
-        <p className="text-muted-foreground">
+        <p className="text-muted-foreground font-noto">
           প্রতিযোগিতামূলক এই জব-মার্কেটে নিজের ক্যারিয়ারকে নিয়ে যান অনন্য
           উচ্চতায়। আপনার জন্য প্রয়োজনীয় সব ক্যাটাগরিই রয়েছে এখানে। বেছে নিন
           আপনার সবচেয়ে পছন্দের কোর্সটি।
@@ -51,7 +51,7 @@ const RandomCourse = async () => {
                         <h1 className="text-xl font-bold mt-4">
                           {courses?.data[0]?.name}
                         </h1>
-                        <p className="text-muted-foreground">
+                        <p className="text-muted-foreground font-noto">
                           {courses?.data[0]?.description?.length > 300
                             ? `${courses?.data[0]?.description?.substring(
                                 0,

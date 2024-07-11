@@ -261,7 +261,10 @@ const CourseFilters = ({ parantClass }: Props) => {
           </AccordionItem>
         </Accordion>
       </div>
-      <Button onClick={handleClearFilter} className="w-full mt-4">
+      <Button
+        onClick={handleClearFilter}
+        className="w-full mt-4 font-siliguri text-lg"
+      >
         রিসেট ফিল্টার
       </Button>
     </div>

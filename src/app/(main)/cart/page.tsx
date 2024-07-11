@@ -80,7 +80,7 @@ const page = async () => {
           />
         </div>
       ) : (
-        <div className="text-center">
+        <div className="text-center my-16">
           <Image
             src={assests.CartEmpty}
             alt="empty cart"
