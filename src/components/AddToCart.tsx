@@ -6,6 +6,7 @@ import { updateUser } from "@/redux/features/auth/authSlice";
 import { useAddCartMutation } from "@/redux/features/cart/cartApi";
 import { ShoppingBag } from "lucide-react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
@@ -14,18 +15,30 @@ interface Props {
   courseId: string;
   cartText?: string;
   parantClass?: string;
+  textClass?: string;
 }
 
-const AddToCart = ({ courseId, cartText = "কার্ট", parantClass }: Props) => {
+const AddToCart = ({
+  courseId,
+  cartText = "কার্ট",
+  parantClass,
+  textClass,
+}: Props) => {
   const dispatch = useDispatch();
   const session = useSession();
+  const router = useRouter();
+
   const [addCart, { isLoading, isSuccess, error, data }] = useAddCartMutation(
     {}
   );
 
   const handleAddToCart = async () => {
-    await addCart({ courseId, accessToken: session?.data?.accessToken });
-    await customRevalidateTag("Cart");
+    if (!session?.data) {
+      router.push("/login");
+    } else {
+      await addCart({ courseId, accessToken: session?.data?.accessToken });
+      await customRevalidateTag("Cart");
+    }
   };
 
   useEffect(() => {
@@ -45,7 +58,7 @@ const AddToCart = ({ courseId, cartText = "কার্ট", parantClass }: Prop
       onClick={handleAddToCart}
     >
       <ShoppingBag size={20} className="text-primary font-semibold" />{" "}
-      <span>{cartText}</span>
+      <span className={textClass}>{cartText}</span>
     </Button>
   );
 };

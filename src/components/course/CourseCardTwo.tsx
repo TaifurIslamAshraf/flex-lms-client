@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { authOptions } from "@/lib/auth";
 import { serverUrl } from "@/lib/utils";
 import { ICourse } from "@/types/courses";
+import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import AddToCart from "../AddToCart";
@@ -10,7 +12,9 @@ type Props = {
   course: ICourse;
 };
 
-const CourseCardTwo = ({ course }: Props) => {
+const CourseCardTwo = async ({ course }: Props) => {
+  const session = await getServerSession(authOptions);
+
   return (
     <Card className="bg-muted rounded-xl md:hover:translate-x-3 transition-all duration-500 hover:shadow-md md:flex block">
       <Link href={`/courses/${course?.slug}`}>
@@ -45,7 +49,7 @@ const CourseCardTwo = ({ course }: Props) => {
             courseId={course?._id}
             parantClass="flex items-center gap-1 font-siliguri"
           />
-          <Link href={`/purchase/${course?.slug}`}>
+          <Link href={session ? `/purchase/${course?.slug}` : `/login`}>
             <Button className="font-siliguri font-semibold">
               কোর্সটি কিনুন
             </Button>

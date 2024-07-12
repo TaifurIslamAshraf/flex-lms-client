@@ -36,7 +36,7 @@ const CourseCurriculum = ({ courseData }: { courseData: ICourseData[] }) => {
         </h1>
         <div className="flex items-center justify-center text-center gap-6">
           <div className="bg-white text-muted-foreground px-2 py-1 text-lg font-semibold rounded-xl leading-6">
-            <h1>{courseData.length}</h1>
+            <h1>{courseData?.length}</h1>
             <h2 className="font-noto">লেসন</h2>
           </div>
 
