@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 
 import CheckoutForm from "@/components/CheckoutForm";
 import OrderItems from "@/components/OrderItems";
+import { handleRevalidation } from "@/lib/_actions/revalidateTag";
 import { checkoutSchema } from "@/lib/formShemas/checkout.schema";
 import { updateCartItems } from "@/redux/features/cart/cartSlice";
 import { useCreateOrderMutation } from "@/redux/features/checkout/checkoutApi";
@@ -57,7 +58,7 @@ const Purchase = ({ params }: Props) => {
     };
 
     await createOrder({ payload, accessToken: session?.data?.accessToken });
-
+    await handleRevalidation("Order");
     router.refresh();
   };
 

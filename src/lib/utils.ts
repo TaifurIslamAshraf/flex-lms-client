@@ -7,6 +7,8 @@ export function cn(...inputs: ClassValue[]) {
 
 export const serverApi = process.env.NEXT_PUBLIC_SERVER_API as string;
 export const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL as string;
+export const clintDashboardApi = process.env
+  .NEXT_PUBLIC_CLIENT_DASHBOARD_API as string;
 
 export function extractVideoID(url: string): string | null {
   if (!url || typeof url !== "string") {

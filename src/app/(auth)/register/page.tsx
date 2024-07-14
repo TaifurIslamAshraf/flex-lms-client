@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { handleRevalidation } from "@/lib/_actions/revalidateTag";
 import { useRegisterMutation } from "@/redux/features/auth/authApi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
@@ -72,9 +73,10 @@ const Register = () => {
   const [register, { isLoading, error, isSuccess, data }] =
     useRegisterMutation();
 
-  const handleSubmit = (value: z.infer<typeof registerFormSchema>) => {
+  const handleSubmit = async (value: z.infer<typeof registerFormSchema>) => {
     let { confirmPassword, ...data } = value;
-    register(data);
+    await register(data);
+    await handleRevalidation("User");
   };
 
   useEffect(() => {

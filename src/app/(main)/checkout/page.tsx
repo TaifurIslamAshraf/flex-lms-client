@@ -9,7 +9,10 @@ import { cn } from "@/lib/utils";
 
 import CheckoutForm from "@/components/CheckoutForm";
 import OrderItems from "@/components/OrderItems";
-import { customRevalidateTag } from "@/lib/_actions/revalidateTag";
+import {
+  customRevalidateTag,
+  handleRevalidation,
+} from "@/lib/_actions/revalidateTag";
 import { checkoutSchema } from "@/lib/formShemas/checkout.schema";
 import { useGetAllCartItemsQuery } from "@/redux/features/cart/cartApi";
 import { updateCartItems } from "@/redux/features/cart/cartSlice";
@@ -51,6 +54,7 @@ const Checkout = () => {
 
     await createOrder({ payload, accessToken: session?.data?.accessToken });
     await customRevalidateTag("Cart");
+    await handleRevalidation("Order");
     router.refresh();
   };
 
