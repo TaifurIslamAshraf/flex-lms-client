@@ -19,7 +19,7 @@ const page = async ({ searchParams }: Props) => {
   const paginationData: IPagination = courses?.data?.meta;
 
   return (
-    <div className={cn("pt-[120px]", styles.paddingX, styles.layout)}>
+    <div className={cn("pt-[120px] w-full", styles.paddingX, styles.layout)}>
       <div className="space-y-4">
         <h1 className="text-primary text-4xl font-bold font-siliguri">
           সকল কোর্স
@@ -35,7 +35,7 @@ const page = async ({ searchParams }: Props) => {
           <CourseFilters parantClass="px-3" />
         </div>
 
-        <div className="my-8 space-y-8">
+        <div className="my-8 flex-1 space-y-8">
           {coursesData &&
             coursesData?.map((course) => (
               <CourseCardTwo key={course?._id} course={course} />

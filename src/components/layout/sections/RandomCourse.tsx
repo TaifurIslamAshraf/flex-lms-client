@@ -1,12 +1,31 @@
+"use client";
+
 import { styles } from "@/app/styles";
 import CourseCard from "@/components/course/CourseCard";
-import { getRandomCourses } from "@/lib/_actions/course.action";
+import LayoutCategorySlider from "@/components/LayoutCategorySlider";
 import { cn, serverUrl } from "@/lib/utils";
+import { useGetAllCategoryQuery } from "@/redux/features/categorize/categorizeApi";
+import { useFeaturedCoursesQuery } from "@/redux/features/courses/courseApi";
+import { ICateogry } from "@/types/category";
 import { ICourse } from "@/types/courses";
 import Image from "next/image";
 import Link from "next/link";
-const RandomCourse = async () => {
-  const courses = await getRandomCourses();
+import { useEffect, useState } from "react";
+const RandomCourse = () => {
+  const [categoryId, setCategoryId] = useState<string | null>(null);
+
+  const { data: category } = useGetAllCategoryQuery({});
+  const {
+    data: courses,
+    isLoading: courseLoading,
+    refetch,
+  } = useFeaturedCoursesQuery({ category: categoryId });
+  const categoryData: ICateogry[] = category?.data?.category;
+
+  useEffect(() => {
+    refetch();
+  }, [categoryId, refetch]);
+
   return (
     <div
       className={cn(
@@ -26,6 +45,14 @@ const RandomCourse = async () => {
           উচ্চতায়। আপনার জন্য প্রয়োজনীয় সব ক্যাটাগরিই রয়েছে এখানে। বেছে নিন
           আপনার সবচেয়ে পছন্দের কোর্সটি।
         </p>
+      </div>
+
+      <div className="">
+        <LayoutCategorySlider
+          category={categoryData}
+          categroyId={categoryId}
+          setCategoryId={setCategoryId}
+        />
       </div>
 
       <div className="grid lg:grid-cols-2 grid-cols-1 justify-center gap-4">
@@ -86,6 +113,12 @@ const RandomCourse = async () => {
           </>
         )}
       </div>
+
+      {courses?.data?.length === 0 && (
+        <h1 className="text-center text-black/50 font-light italic">
+          এই ক্যাটাগরিতে কোন কোর্স পাওয়া যায় না।
+        </h1>
+      )}
     </div>
   );
 };

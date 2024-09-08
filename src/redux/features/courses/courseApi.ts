@@ -13,7 +13,15 @@ export const courseApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    featuredCourses: build.query({
+      query: (category) => ({
+        url: "/course/featured-courses",
+        params: category,
+        method: "GET",
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
-export const { useSingleCourseQuery } = courseApi;
+export const { useSingleCourseQuery, useFeaturedCoursesQuery } = courseApi;

@@ -28,7 +28,7 @@ const Search = () => {
         <SearchIcon fillRule="evenodd" clipRule="evenodd" className="" />
       </Button>
       <Input
-        className="relative pl-12 max-w-[400px] min-w-[400px] w-full"
+        className="relative pl-12 max-w-[400px] min-w-[300px] w-full"
         name="search"
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}

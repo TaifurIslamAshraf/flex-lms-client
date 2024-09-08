@@ -27,7 +27,7 @@ const Navbar = () => {
               <Image
                 src={assests.Logo}
                 alt="Logo"
-                className="h-[35px] w-[170px]"
+                className="min-h-[35px] min-w-[170px]"
                 height={35}
                 width={170}
               />

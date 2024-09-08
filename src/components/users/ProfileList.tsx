@@ -8,6 +8,8 @@ import Link from "next/link";
 import Logout from "./Logout";
 
 import { useSelector } from "react-redux";
+import Search from "../Search";
+import LoginRegisterBtn from "./LoginRegisterBtn";
 import ProfilePicture from "./ProfilePicture";
 
 const profileListLink = [
@@ -35,14 +37,18 @@ const ProfileList = ({ className }: IuserList) => {
 
   return (
     <div className={cn(className)}>
-      <div className="md:flex block gap-6 items-center">
-        <ProfilePicture avatar={user?.avatar} height={50} width={50} />
-        <div className="">
-          <h1 className="font-bold text-xl uppercase">{user?.name}</h1>
-          <p className="text-muted-foreground">Mobile: {user?.phone}</p>
-        </div>
-      </div>
-      <Separator className="my-6" />
+      {user?.name && (
+        <>
+          <div className="md:flex block gap-6 items-center">
+            <ProfilePicture avatar={user?.avatar} height={50} width={50} />
+            <div className="">
+              <h1 className="font-bold text-xl uppercase">{user?.name}</h1>
+              <p className="text-muted-foreground">Mobile: {user?.phone}</p>
+            </div>
+          </div>
+          <Separator className="my-6" />
+        </>
+      )}
       <div className="">
         {profileListLink.map((item, i) => (
           <div className="mb-4" key={i}>
@@ -52,7 +58,16 @@ const ProfileList = ({ className }: IuserList) => {
           </div>
         ))}
 
-        <Logout />
+        <div className={cn(user?.name ? "mt-5" : "mt-10")}>
+          {user?.name ? (
+            <Logout />
+          ) : (
+            <LoginRegisterBtn className="min-w-full" />
+          )}
+        </div>
+        <div className="mt-10">
+          <Search />
+        </div>
       </div>
     </div>
   );

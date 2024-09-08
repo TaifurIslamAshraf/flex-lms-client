@@ -33,7 +33,7 @@ const Categorize = () => {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-primary-foreground hover:bg-primary hover:text-secondary font-noto font-semibold text-[1rem]">
+          <NavigationMenuTrigger className="bg-primary-foreground hover:bg-primary hover:text-secondary font-siliguri font-semibold text-[1rem]">
             সকল ক্যাটাগরি
           </NavigationMenuTrigger>
           <NavigationMenuContent className=" p-4 max-h-[85vh] overflow-y-auto">
@@ -50,7 +50,7 @@ const Categorize = () => {
                     >
                       <h1
                         onClick={() => handleCategory(item?._id)}
-                        className="cursor-pointer my-2 hover:text-primary"
+                        className="cursor-pointer font-siliguri my-2 hover:text-primary"
                       >
                         {item?.name}
                       </h1>
@@ -66,7 +66,7 @@ const Categorize = () => {
                       {item?.courses && item?.courses?.length > 0 ? (
                         <div className="max-w-[650px] w-full ml-6 py-3 space-y-2">
                           <Link
-                            className="font-bold text-lg hover:text-primary"
+                            className="font-bold font-siliguri text-lg hover:text-primary"
                             href={`/courses?subcategory=${item?._id}`}
                           >
                             {item?.name}
