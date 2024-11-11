@@ -1,12 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "flex-lms-server-production.up.railway.app",
-      },
-    ],
+    domains: ['flex-lms-server-production.up.railway.app'],  // Use domains instead of remotePatterns for simpler config
+    unoptimized: true,  // Add this for preview deployments
   },
 };
 
