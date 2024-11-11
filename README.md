@@ -4,6 +4,8 @@
 
 Flex LMS is a comprehensive Learning Management System (LMS) designed and developed based on the requirements of Flex Store Company. This platform enables users to manage learning content, courses, and layouts with ease. It includes essential features for user management, course creation, and role-based access control, among others.
 
+> **Note**: This project is deployed on free hosting tiers, so there may be occasional delays in loading data due to server startup times on the free tier.
+
 ## Features
 
 - **Authentication**: User registration, login, and logout with email verification.
